@@ -37,7 +37,11 @@
       let g = data;
 
       $.each(g, function( index, value ) {
-        alert( g[z].id + ": " + g[z].value );
+        // alert( g[z].id + ": " + g[z].value );
+        
+        let splitXY = (g[z].value).split(',');
+        alert(splitXY[0]);
+        alert(splitXY[1]);
         z++
       });
 
@@ -51,6 +55,43 @@
     });
 
   });
+  
+"a" /:  "#i,#"ii
+PSEUDO// 
+diff+ = []; //if greater than, then differences stored here
+let z = (id, xval, #ix, yval, #iiy) => return absval(xval - #ix)+absval(yval - #iiy); 
+var myarray=[25, 8, 7, 41]
+myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
+    return a - b
+})
+  
+  xval 6 yval 33
+  
+   a    31     49
+   b    44     67
+  
+  absval(6 - 31) + absval(33 - 49) = difference score 25 + 16 = 41
+  av(6-44) + av(33-67) = dscore 38 + 34 = 72 ! this ones further away 
+  
+  let string = '999,888';
+console.log(a)
+
+let a = (string) => {
+if (string.indexOf(',') > -1) { 
+  let b = string.split(',') 
+  return b; }
+}
+
+let z = a('999,888');
+
+console.log(z)
+
+let c = z[0] + "," + z[1];
+
+console.log(c)
+  
+  
+  
   
 //// UI RENDER METHODS // 
 //
