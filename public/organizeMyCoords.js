@@ -1,109 +1,96 @@
-((W, $, can, inp, _d, send) => {  
-  
-// let doWork = function(url, {data, cache, headers}) {
-
-//   let test = () => {data = data + "!"; 
-//   return data ;}
-//   data = test();
-
-//   return {url, data};
-  
-// }
-
-// let result = doWork("api/test", {data: "string",cache:false, headers:1});
-// //result.url = "api/test" , result.data = "string!"
+((W, $, can, inp, _d, send) => 
+  {  
   
 ///////// SET PRIME UI ///////// 
 ////
  //i./ START button /// Click-Listener ///
-  let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
-  
-  _Iui.append("<input type='button' id='run' value='START' />");
-  
-  $( "#run" ).click(function() {
-    // get(); //get data
-    send(); //send data to view
-  });
+    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
+
+    _Iui.append("<input type='button' id='run' value='START' />");
+
+    $( "#run" ).click(function() 
+                     {
+
+                       send(); //send data to view
+
+                     });
 ////
 ///////// SET PRIME UI ///////// 
 ////////////////////////////////
 
-  
   // let getCan = () => {
     // let ctx = $("#myCanvas")[0].getContext('2d');
     //
   // }
-//   let { get : function() {
-              
-//               } }
-// let { firstName : first,
-// twitter   : tweet } = doWork();
-//   let { firstName, lastName } = doWork();
-//get data
-  //$(function(s) {
-  
+
 ///////// GET DATA ///////// 
 //// ** Responds to Click-Listener --> se at //i./ **
  //ii./ Data gathered and returned to window method
 
-    
-    
+(function () 
+ {
 
-  let get = (d) => 
-    {       
+  var myData;
 
-    let [z, s, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]];
-      var sendit;
+  function test(callback) {
+    $.getJSON('notebook-json-data.php', function (data) {
+      callback(data);
+    });
+  }
 
-     $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
+  test(function (data) {
+    myData = data;
+    autoPopulate('field', 'id');
+  });
 
+  function autoPopulate(field, id) {
+    console.log(myData);
+  }
+
+});
+
+  ((W, $, d, sender) => 
+    {  
+
+      function sender(callback) 
       {
+        
+        let [z, s, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]]; 
 
-      d = data;
+        $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
 
-      $.each(d, function( index, value ) 
         {
 
-        splitXY = (d[z].value).split(',');
-        //alert(splitXY[0]);
-        //alert(splitXY[1]);
-        xv = splitXY[0];
-        yv = splitXY[1];
-        xa.push(xv);
-        ya.push(yv);
-        z++ 
+        _d = data;
+
+        $.each(_d, function( index, value ) 
+          {
+
+          splitXY = (_d[z].value).split(',');
+          //alert(splitXY[0]);
+          //alert(splitXY[1]);
+          xv = splitXY[0];
+          yv = splitXY[1];
+          xa.push(xv);
+          ya.push(yv);
+          z++ 
+
+          });
 
         });
-       
-       sendit = d; 
-       
-       // let sender = () => {
-       //   return
-       // }
+      }
       
-       console.log(sendit);
-//        ((W, $, can, inp, _d, d_, send) => 
-//          {
-         
-         
-         
-//          })(window, jQuery);
-        
-        });
-      
-      
-      return sendit;
+    })(window, jQuery);
 
-
-    };
-
+  // W.get = get;
+  // let sender = get(_d);
    
-    
+  // console.log(sender);
     
  
   send = () => {
-    get(_d);
-    let p = get(_d);
+    // get(_d);
+    // let p = get(_d);
     // console.log(p);
   };
 // let a = get(_d); 
@@ -255,8 +242,6 @@ W.can(D.getElementById("quads12"), D, {h:100,w:100});
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
 
-// let c = W.send();
-// console.log(c);
 
 
 
