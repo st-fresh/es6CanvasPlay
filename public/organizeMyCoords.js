@@ -49,10 +49,10 @@
     
     
 
-  let get = (d) => 
+  let get = (d,di) => 
     {       
 
-    let [z, s, d_, splitXY, xv, yv, xa, ya] = [0,,,,,,[],[]];
+    let [z, s, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]];
 
      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
 
@@ -60,7 +60,8 @@
 
       d = data;
 
-      $.each(d, function( index, value ) {
+      $.each(d, function( index, value ) 
+             {
 
         splitXY = (d[z].value).split(',');
         //alert(splitXY[0]);
@@ -70,16 +71,14 @@
         xa.push(xv);
         ya.push(yv);
         z++ 
-        if(z = 0) { s = d; } //sends data to s only once on first loop -- DRY principle
+
+      });
+      di = d; console.log(di) //sends data to s only once on first loop -- DRY principle
         
         });
-        var s = d_;
-       d_ = d;
-           // console.log(_d, d);
-      });
       d_ === d_;
       d_ === _d;
-      console.log(s);
+      // console.log(s);
       return {s:d_};
 
 
@@ -90,7 +89,7 @@
     
  
   send = () => {
-    get(_d);
+    get(_d, d_);
   };
 // let a = get(_d); 
 //   // let s = get();
