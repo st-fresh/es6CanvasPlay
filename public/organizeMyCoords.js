@@ -4,17 +4,17 @@
 ////////////////////////////////
 ///////// SET PRIME UI ///////// 
 ////
-///i./ START button /// Click-Listener ///
-  let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
+////i./ START button /// Click-Listener ///
+    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
 
-  _Iui.append("<input type='button' id='run' value='START' />");
+    _Iui.append("<input type='button' id='run' value='START' />");
 
-  $( "#run" ).click(function() 
-                   {
+    $( "#run" ).click(function() 
+                     {
 
-                     //send(); //send data to view
+                       //send(); //send data to view
 
-                   });
+                     });
 ////
 ///////// SET PRIME UI ///////// 
 ////////////////////////////////
@@ -28,10 +28,10 @@
 ///////// GET DATA ////////////// 
 //// ** Responds to Click-Listener --> ///i./
 //// 
-///ii./ Data gathered and returned to window method
-  ((W, $, send, out, d) => 
+////ii./ Data gathered and returned to window method
+  ((W, $, send, out) => 
     {  
-      
+      var d, r;
       function sender(callback) 
       {
         
@@ -64,26 +64,33 @@
       {
         
         d = data;
-        send('field', 'id');
+        send(d);
 
       });
     
-      function send(field, id) {
+      function send(x) {
         console.log(d);
+                  console.log(x,"test W.out");
+
+        
       }
-    
+      // let raw = r;
       
-      out = () => 
-        {
-        
-          let s = send();
-          
-        return s;
-        
-        
-        };
+      // send(d);
     
-      W.out = out;
+//       out = () => 
+//         {
+//           // send();
+//           let s = send();
+//           console.log(r,"test W.out");
+//           // return s;
+        
+//         };
+// out();
+    
+      W.send = send;
+      // let 
+      // console.log(W.)
       
     
     })(window, jQuery);
@@ -247,6 +254,8 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
+// W.out(xInp.val(), yInp.val());
+W.send(0);
 
 
 
