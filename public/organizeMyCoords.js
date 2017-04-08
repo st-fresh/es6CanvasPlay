@@ -1,4 +1,4 @@
-((W, $, can, inp, _d, send) => {  
+((W, $, can, inp, _d, d_, send) => {  
   
 // let doWork = function(url, {data, cache, headers}) {
 
@@ -52,7 +52,7 @@
   let get = (d) => 
     {       
 
-    let [z, d_, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]];
+    let [z, s, d_, splitXY, xv, yv, xa, ya] = [0,,,,,,[],[]];
 
      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
 
@@ -70,34 +70,37 @@
         xa.push(xv);
         ya.push(yv);
         z++ 
-
+        if(z = 0) { s = d; } //sends data to s only once on first loop -- DRY principle
+        
         });
-  
-       _d = d;
+        var s = d_;
+       d_ = d;
            // console.log(_d, d);
       });
-      d_ = _d;
-      console.log(d_);
-      return {s:_d};
+      d_ === d_;
+      d_ === _d;
+      console.log(s);
+      return {s:d_};
 
 
-    }
+    };
 
    
     
     
  
-  send = () => 
-  {
-let a = get(_d); 
-  // let s = get();
-    console.log(a.s);
+  send = () => {
+    get(_d);
+  };
+// let a = get(_d); 
+//   // let s = get();
+//     // console.log(a.s);
 
-  return _d;
+//   return _d;
     
-  }
+//   }
   
-  W.send = send;
+//   W.send = send;
 
   
  // });
@@ -224,12 +227,12 @@ myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
-const W = window;
-const D = document
+const W    = window;
+const D    = document;
 const xLbl = "<u>X-Value</u>";
 const xInp = $('<input id="valX" type="text" />');
-const yLbl = "<u>Y-Value</u>"
-const yInp = $('<input id="valY" type="text" />')
+const yLbl = "<u>Y-Value</u>";
+const yInp = $('<input id="valY" type="text" />');
 
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
