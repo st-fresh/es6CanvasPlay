@@ -1,4 +1,4 @@
-((W, $, can, inp, _d, d_, send) => {  
+((W, $, can, inp, _d, send) => {  
   
 // let doWork = function(url, {data, cache, headers}) {
 
@@ -49,10 +49,11 @@
     
     
 
-  let get = (d,di) => 
+  let get = (d) => 
     {       
 
     let [z, s, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]];
+      var sendit;
 
      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
 
@@ -61,7 +62,7 @@
       d = data;
 
       $.each(d, function( index, value ) 
-             {
+        {
 
         splitXY = (d[z].value).split(',');
         //alert(splitXY[0]);
@@ -72,14 +73,26 @@
         ya.push(yv);
         z++ 
 
-      });
-      di = d; console.log(di) //sends data to s only once on first loop -- DRY principle
+        });
+       
+       sendit = d; 
+       
+       // let sender = () => {
+       //   return
+       // }
+      
+       console.log(sendit);
+//        ((W, $, can, inp, _d, d_, send) => 
+//          {
+         
+         
+         
+//          })(window, jQuery);
         
         });
-      d_ === d_;
-      d_ === _d;
-      // console.log(s);
-      return {s:d_};
+      
+      
+      return sendit;
 
 
     };
@@ -89,7 +102,9 @@
     
  
   send = () => {
-    get(_d, d_);
+    get(_d);
+    let p = get(_d);
+    // console.log(p);
   };
 // let a = get(_d); 
 //   // let s = get();
