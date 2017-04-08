@@ -1,4 +1,4 @@
-((W, $, can, inp, _d, send, pull) => 
+((W, $, can, inp, _d, send, runOnClick) => 
   {  
 
 ////////////////////////////////
@@ -7,12 +7,12 @@
 ////i./ START button /// Click-Listener ///
     let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
 
-    _Iui.append("<input type='button' id='run' value='START' />");
-
+    _Iui.append("<input type='button' id='run' value='START'>");
+  
     $( "#run" ).click(function() 
                      {
-
-                       //send(); //send data to view
+                       
+                       runOnClick(); //CRUNCH VALUES AGAIN
 
                      });
 ////
@@ -29,9 +29,10 @@
 //// ** Responds to Click-Listener --> ///i./
 //// 
 ////ii./ Data gathered and returned to window method
-  ((W, $, send, out) => 
+  ((W, $, send, out, inputs) => 
     {  
     
+    inputs = $('#inputUI');
     var d, dist;
     
     function sender(callback) 
@@ -74,10 +75,8 @@
 
     function send(x,y) 
     {
-      let xx = x;
-      let yy = y;
-      console.log(xx);
-      console.log(yy);
+     
+      console.log(inputs);
       console.log(d);
       console.log(dist);
 
@@ -92,13 +91,12 @@
   
 
 
-//   pull = (x,y) => {
+  runOnClick = (x,y) => {
     
-//     return W.send(x,y);
+    W.send();
     
-//   }
+  }
   
-//   W.pull = pull;
   
   
   
@@ -203,19 +201,20 @@ myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
   W.can = can;
 ////  
  //.ii/ Make Input-Field funcs
-  inp = (a, {lX, iX, lY, iY}, ...r) => {
+  inp = (a, {lX, iX, lY, iY}, ...r) => 
+    {
 
-                                       a.append(lX);
-                                       a.append(iX);
-                                       a.append(lY);
-                                       a.append(iY);
+     a.append(lX);
+     a.append(iX);
+     a.append(lY);
+     a.append(iY);
 
-                                       iX.val(Math.floor(r[0].rxN));
-                                       iY.val(Math.floor(r[0].ryN));
+     iX.val(Math.floor(r[0].rxN));
+     iY.val(Math.floor(r[0].ryN));
 
-                                       //return {}
-    
-                                       }
+     //return {}
+
+     }
   
   W.inp = inp;
 ////
@@ -240,12 +239,7 @@ W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
 // if(xInp)
-console.log(xInp);
-W.send(x=xInp, y=yInp);
-
-
-
-
+// W.send();
 
 
 
