@@ -10,11 +10,11 @@
     _Iui.append("<input type='button' id='run' value='START'>");
   
     $( "#run" ).click(function() 
-                     {
-                       
-                       runOnClick(); //CRUNCH VALUES AGAIN
+                        {
 
-                     });
+                          runOnClick(); //CRUNCH VALUES AGAIN
+
+                        });
 ////
 ///////// SET PRIME UI ///////// 
 ////////////////////////////////
@@ -52,7 +52,6 @@
                                  //alert(splitXY[1]);
                                  xv = splitXY[0];
                                  yv = splitXY[1];
-                    // Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal))
                                  data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
                                  hyps.push(data[z].hyp); 
                                  z++ 
@@ -75,8 +74,10 @@
 
     function send(x,y) 
     {
-     
-      console.log(inputs);
+     let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
+      console.log(vx, vy);
+                    // Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal))
+      
       console.log(d);
       console.log(dist);
 
