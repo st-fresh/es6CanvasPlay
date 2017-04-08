@@ -71,7 +71,7 @@
 
            });
     
-    function compare(d, dist)
+    function compare(d, dist) //d=sourced array, dist=distances
       {
         //this will be new coordinates.json after for-each adds hypotenueses 
 // g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":73}, {:83}, {:65}, {:89}]
@@ -85,7 +85,7 @@
         
         
         // console.log(d);
-        console.log(d[0].hyp);
+        console.log(d[4].hyp);
         let [i,j,k,l,] = [0,0,0,d.length];
         
         dist.sort(function(a,b){
@@ -93,11 +93,13 @@
         })
         console.log(dist);
         
-        let test1 = $.inArray(d[0].hyp, dist);
-        let test2 = $.inArray(d[1].hyp, dist);
+        let test1 = $.inArray(d[4].hyp, dist);
+        // let test2 = $.inArray(d[4].hyp, dist);
+        console.log(d[4]);
+        console.log(d);
         
         
-        // console.log(test1);
+        console.log(test1);
         // console.log(d[12], dist[12]);
 
 //         for( i, j, k; j < l ; i=k) {
@@ -148,8 +150,8 @@
           hyps.push(d[i].hyp); 
 
         }
-        console.log(hyps);
-        // compare(d, hyps);
+        // console.log(d);
+        compare(d, hyps);
       
       }
 
