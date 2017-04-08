@@ -73,12 +73,54 @@
     
     function compare(d, dist)
       {
+        //this will be new coordinates.json after for-each adds hypotenueses 
+// g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":73}, {:83}, {:65}, {:89}]
+
+// g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":83}, {:65}, {:89}, {:og-73}, {:og-80}, {:og-83}]
+//func.sort(arr); //ascending
         
-        console.log(d, dist);
+//arr is equal to [g[#].hyp, g[#].hyp];
+ //                  /73/ ...    80 ... ascending ... 83 .. 89..
+                // i =    0          1                    2     3
+        
+        
+        console.log(d);
+        let [i,j,l,] = [0,0,d.length];
+        
+        dist.sort(function(a,b){
+          return a - b;
+        })
+        console.log(dist);
+
+        for( i, j ; j < l ; ) {
+          
+          if (dist[i] == d[j].hyp) {
+            // d.push(d[j]);
+            // delete d[d.length].hyp;
+            // d.splice(j,1);
+            // i++;
+            // j = 0;
+          } else if (dist[i] !== d[j].hyp) {
+
+              j++;
+            
+            }
+          
+        }
+          
+        //   -if loop i=0, j=0 i<arr.length    //i4 j0
+        // if(arr[i] === g[j].hyp) {
+        // g.push(g[j));//add to the end of coordinates.json
+        // delete g[g.length].hyp //remove the hyp prop to return to sourced format
+        // g.splice(j, 1);//
+        // i++;
+        // j=0; //reset j when a match is found to restart at 1st index
+        // }ELSE { 
+        // j++; }
         
       }
 
-    function send(x,y) 
+    function send() 
       {
       
         let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
@@ -91,7 +133,7 @@
         for( i = 0 ; i < l ; i++ ) {
 
           [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
-          d[i].hyp = ( Math.floor(Math.sqrt(fvx + fvy)) );
+          d[i].hyp = ( Math.floor(Math.sqrt(fvx + fvy)) ); //hypontenuse is a float, flooring here to match sourced json
           hyps.push(d[i].hyp); 
 
         }
@@ -159,13 +201,13 @@
   
 // "a" /:  "#i,#"ii
 // PSEUDO// 
-var myarray=[25, 8, 7, 41]
-          // 41  72  39  65
-          //  a   b   c   d
-          //
-myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
-    return a - b
-})
+// var myarray=[25, 8, 7, 41]
+//           // 41  72  39  65
+//           //  a   b   c   d
+//           //
+// myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
+//     return a - b
+// })
   
 //   xval 6 yval 33 //user input
 //    id   xv     yv
