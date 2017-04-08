@@ -33,12 +33,12 @@
     {  
     
     inputs = $('#inputUI');
-    var d, dist;
+    var d, xvals, yvals;
     
     function sender(callback) 
       {
 
-      let [z, splitXY, xv, yv, hyps] = [0,,,,[]]; 
+      let [z, splitXY, xval, yval] = [0,, [], []]; 
 
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
                 function(data) 
@@ -50,24 +50,26 @@
                                  splitXY = (data[z].value).split(',');
                                  //alert(splitXY[0]);
                                  //alert(splitXY[1]);
-                                 xv = splitXY[0];
-                                 yv = splitXY[1];
-                                 data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
-                                 hyps.push(data[z].hyp); 
+                                 xval.push(splitXY[0]);
+                                 yval.push(splitXY[1]);
+                                 
+                                 // data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
+                                 //hyps.push(data[z].hyp); 
                                  z++ 
 
                                  });
 
-                  callback(data, hyps);
+                  callback(data, xval, yval);
 
                   });
       }
 
-    sender(function (data, hyps) 
+    sender(function (data, xval, yval) 
            {
 
              d = data;
-             dist = hyps;
+             xvals = xval;
+             yvals = yval;
              send();
 
            });
@@ -77,9 +79,11 @@
      let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
       console.log(vx, vy);
                     // Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal))
+      // g[z].hyp = ( Math.floor(Math.sqrt(hyx + hyy)) )
       
       console.log(d);
-      console.log(dist);
+      console.log(xvals);
+      console.log(yvals);
 
       // x.style.display = "none";
       
