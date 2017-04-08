@@ -1,4 +1,4 @@
-((W, $, can, inp, _d, send) => 
+((W, $, can, inp, _d, send, pull) => 
   {  
 
 ////////////////////////////////
@@ -32,57 +32,75 @@
   ((W, $, send, out) => 
     {  
     
-    var d, r;
+    var d, dist;
+    
     function sender(callback) 
       {
 
-      let [z, splitXY, xv, yv, xa, ya] = [0,,,,[],[]]; 
+      let [z, splitXY, xv, yv, hyps] = [0,,,,[]]; 
 
-      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
-        {
+      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
+                function(data) 
+                  {
 
-        $.each(data, function( index, value ) 
-          {
+                  $.each(data, function( index, value ) 
+                                 {
 
-          splitXY = (data[z].value).split(',');
-          //alert(splitXY[0]);
-          //alert(splitXY[1]);
-          xv = splitXY[0];
-          yv = splitXY[1];
-          data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
-          xa.push(xv);
-          ya.push(yv);
-          z++ 
+                                 splitXY = (data[z].value).split(',');
+                                 //alert(splitXY[0]);
+                                 //alert(splitXY[1]);
+                                 xv = splitXY[0];
+                                 yv = splitXY[1];
+                    // Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal))
+                                 data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
+                                 hyps.push(data[z].hyp); 
+                                 z++ 
 
-          });
+                                 });
 
-        callback(data);
+                  callback(data, hyps);
 
-        });
+                  });
       }
 
-    sender(function (data) 
+    sender(function (data, hyps) 
            {
 
              d = data;
-             send(d);
+             dist = hyps;
+             send();
 
            });
 
-    function send(x) 
+    function send(x,y) 
     {
-
+      let xx = x;
+      let yy = y;
+      console.log(xx);
+      console.log(yy);
       console.log(d);
-      console.log(x,"test W.out");
+      console.log(dist);
 
-
+      // x.style.display = "none";
+      
     }
 
     W.send = send;
-      
+    
     }
   )(window, jQuery);
+  
 
+
+//   pull = (x,y) => {
+    
+//     return W.send(x,y);
+    
+//   }
+  
+//   W.pull = pull;
+  
+  
   
 //         //GIVEN
 //         let data = [
@@ -212,6 +230,7 @@ const xLbl = "<u>X-Value</u>";
 const xInp = $('<input id="valX" type="text" />');
 const yLbl = "<u>Y-Value</u>";
 const yInp = $('<input id="valY" type="text" />');
+var x,y;
 
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
@@ -220,7 +239,9 @@ W.can(D.getElementById("quads12"), D, {h:100,w:100});
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
-W.send(xInp, yInp);
+// if(xInp)
+console.log(xInp);
+W.send(x=xInp, y=yInp);
 
 
 
