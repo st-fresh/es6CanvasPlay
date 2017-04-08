@@ -1,107 +1,89 @@
-((W, $, can, inp, _d, send) => {  
-  
-// let doWork = function(url, {data, cache, headers}) {
+((W, $, can, inp, _d, send) => 
+  {  
 
-//   let test = () => {data = data + "!"; 
-//   return data ;}
-//   data = test();
-
-//   return {url, data};
-  
-// }
-
-// let result = doWork("api/test", {data: "string",cache:false, headers:1});
-// //result.url = "api/test" , result.data = "string!"
-  
+////////////////////////////////
 ///////// SET PRIME UI ///////// 
 ////
- //i./ START button /// Click-Listener ///
-  let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
-  
-  _Iui.append("<input type='button' id='run' value='START' />");
-  
-  $( "#run" ).click(function() {
-    // get(); //get data
-    send(); //send data to view
-  });
+////i./ START button /// Click-Listener ///
+    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
+
+    _Iui.append("<input type='button' id='run' value='START' />");
+
+    $( "#run" ).click(function() 
+                     {
+
+                       //send(); //send data to view
+
+                     });
 ////
 ///////// SET PRIME UI ///////// 
 ////////////////////////////////
 
-  
   // let getCan = () => {
     // let ctx = $("#myCanvas")[0].getContext('2d');
     //
   // }
-//   let { get : function() {
-              
-//               } }
-// let { firstName : first,
-// twitter   : tweet } = doWork();
-//   let { firstName, lastName } = doWork();
-//get data
-  //$(function(s) {
-  
-///////// GET DATA ///////// 
-//// ** Responds to Click-Listener --> se at //i./ **
- //ii./ Data gathered and returned to window method
 
+//////////////////////////////////
+///////// GET DATA ////////////// 
+//// ** Responds to Click-Listener --> ///i./
+//// 
+////ii./ Data gathered and returned to window method
+  ((W, $, send, out) => 
+    {  
     
-    
-
-  let get = (d) => 
-    {       
-
-    let [z, d_, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]];
-
-     $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
-
+    var d, r;
+    function sender(callback) 
       {
 
-      d = data;
+      let [z, splitXY, xv, yv, xa, ya] = [0,,,,[],[]]; 
 
-      $.each(d, function( index, value ) {
+      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
+        {
 
-        splitXY = (d[z].value).split(',');
-        //alert(splitXY[0]);
-        //alert(splitXY[1]);
-        xv = splitXY[0];
-        yv = splitXY[1];
-        xa.push(xv);
-        ya.push(yv);
-        z++ 
+        $.each(data, function( index, value ) 
+          {
+
+          splitXY = (data[z].value).split(',');
+          //alert(splitXY[0]);
+          //alert(splitXY[1]);
+          xv = splitXY[0];
+          yv = splitXY[1];
+          data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
+          xa.push(xv);
+          ya.push(yv);
+          z++ 
+
+          });
+
+        callback(data);
 
         });
-  
-       _d = d;
-           // console.log(_d, d);
-      });
-      d_ = _d;
-      console.log(d_);
-      return {s:_d};
+      }
+
+    sender(function (data) 
+           {
+
+             d = data;
+             send(d);
+
+           });
+
+    function send(x) 
+    {
+
+      console.log(d);
+      console.log(x,"test W.out");
 
 
     }
 
-   
-    
-    
- 
-  send = () => 
-  {
-let a = get(_d); 
-  // let s = get();
-    console.log(a.s);
-
-  return _d;
-    
-  }
-  
-  W.send = send;
+    W.send = send;
+      
+    }
+  )(window, jQuery);
 
   
- // });
-
 //         //GIVEN
 //         let data = [
 //           {"id":"a","value":"31,49"}, //[0] index
@@ -224,12 +206,12 @@ myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
-const W = window;
-const D = document
+const W    = window;
+const D    = document;
 const xLbl = "<u>X-Value</u>";
 const xInp = $('<input id="valX" type="text" />');
-const yLbl = "<u>Y-Value</u>"
-const yInp = $('<input id="valY" type="text" />')
+const yLbl = "<u>Y-Value</u>";
+const yInp = $('<input id="valY" type="text" />');
 
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
@@ -237,9 +219,9 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
+// W.out(xInp.val(), yInp.val());
+W.send(xInp, yInp);
 
-// let c = W.send();
-// console.log(c);
 
 
 
