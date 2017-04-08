@@ -85,21 +85,33 @@
         
         
         // console.log(d);
-        console.log(d[4].hyp);
-        let [i,j,k,l,] = [0,0,0,d.length];
+        console.log(d[0].hyp);
+        let [i,j,l,m, newD] = [0,0,d.length,,Array.from('12345678901234567890123456')];
         
-        dist.sort(function(a,b){
+        
+        newD.push.apply(d,newD);//add to sourced array arbitrary values that will hold ordered data
+        
+        dist.sort(function(a,b){ //sort distances from input or hardcoded x,y from least to greatest (closest to furthest)
           return a - b;
         })
-        console.log(dist);
+        // console.log(dist);
+
         
-        let test1 = $.inArray(d[4].hyp, dist);
         // let test2 = $.inArray(d[4].hyp, dist);
-        console.log(d[4]);
+        // console.log(d[0]);
         console.log(d);
+        // d.push(d[4]);
+        // console.log(d);
+        
+        //for( i,j; i<l; i++ ) {
+          
+          // m = $.inArray(d[i].hyp, dist);
+          
+        
+        //}
         
         
-        console.log(test1);
+        // console.log(match, d[26]);
         // console.log(d[12], dist[12]);
 
 //         for( i, j, k; j < l ; i=k) {
@@ -274,7 +286,9 @@
  //.ii/ Make Input-Field funcs
   inp = (a, {lX, iX, lY, iY}, ...r) => 
     {
-
+    
+     let bad; 
+    
      a.append(lX);
      a.append(iX);
      a.append(lY);
@@ -282,7 +296,32 @@
 
      iX.val(Math.floor(r[0].rxN));
      iY.val(Math.floor(r[0].ryN));
+    // let b = Number.isInteger(iX.val());
+    // let b = Number("-");
 
+     $.isNumeric(iX.val()) ? a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>") : iX.style.fontStyle = "bold";
+     $.isNumeric(iY.val()) ? a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>") : iY.style.fontStyle = "bold";
+        
+     if ( $('#badX') || $('#badY') ) {
+
+       setTimeout(function() 
+                    {
+                    $('#badX').display = "none";
+                    $('#badY').display = "none";
+                    }, 1200);
+  
+     }
+     
+     
+    // iX.val() === 26 ? b=true : b=false;
+    // Number(b);
+     // console.log( typeof b, b);
+    // let c;
+    // b == NaN ? c =true : c = false;
+    // console.log(c);
+
+    // let d = $.isNumeric( b );
+    // console.log(d);
      //return {}
 
      }
