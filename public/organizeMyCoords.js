@@ -25,16 +25,16 @@
   // }
 
 //////////////////////////////////
-///////// GET DATA ////////////// 
+///////// GET & CRUNCH DATA ////////////// 
 //// ** Responds to Click-Listener --> ///i./
 //// 
-////ii./ Data gathered and returned to window method
   ((W, $, send, out, inputs) => 
     {  
-    
+////ii./ Grab input-fields --> Set local-globals for data
     inputs = $('#inputUI');
-    var d, xvals, yvals;
+    let d, xvals, yvals;
     
+////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
     function sender(callback) 
       {
 
@@ -48,80 +48,64 @@
                                  {
 
                                    splitXY = (data[z].value).split(',');
-                                   //alert(splitXY[0]);
-                                   //alert(splitXY[1]);
                                    xval.push(splitXY[0]);
                                    yval.push(splitXY[1]);
                                    z++ 
 
-                                 });
+                                 }
+                        );
 
                   callback(data, xval, yval);
 
-                  });
+                  }
+               );
       }
 
+////iv./ Pass datas with callback --> Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
 
-             d = data;
+             d     = data;
              xvals = xval;
              yvals = yval;
              send();
 
-           });
+           }
+          );
     
-    function compare(d, dist) //d=sourced array, dist=distances
+////v./ Compare --> Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
+    function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
       {
-        //this will be new coordinates.json after for-each adds hypotenueses 
 
-        
-        // console.log(d);
         let [i,j,l,m] = [0,26,dist.length,];
         
         
-        // newD.push.apply(d,newD);//add to sourced array arbitrary values that will hold ordered data
-        
-        console.log(dist, d)
-        
-        // if()
-     for( i, j ; i<l ; i++) {
-       
-      m = $.inArray(d[i].hyp, dist); //for d[0].hyp = 26, index in dist is 3 (m=3) // it's 3rd farthest
-      console.log(d[i].hyp);
-       d[j+m] = d[i];
-       
-      
-      //delete d[j+m].hyp; //comment-out this line to see order based on hyp prop
+        for( i, j ; i<l ; i++) {
 
-     }
-        console.log(d)
-        
-//         
+          m = $.inArray(d[i].hyp, dist);
+ 
+          d[j+m] = d[i];
+
+          delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
+
+        }
 
     }
 
-  // console.log(dZ)
-
-
-
-
-        
-        
-
-
-        
-      // }
+////vi./ Send --> Prep and then Send data to compare() @ ////v./
 
     function send() 
       {
       
         // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input
-        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hardcoded input
-        // console.log(vx, vy);
-        // console.log(d);
-        // console.log(xvals);
-        // console.log(yvals);
+        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here
+        
+//draw?/// TEST --> all should be defined before moving forward to compare() and/or draw()
+       // console.log(vx, vy);
+      // console.log(d);
+     // console.log(xvals);
+    // console.log(yvals);
+        
         let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
       
         for( i = 0 ; i < l ; i++ ) {
@@ -131,10 +115,14 @@
           hyps.push(d[i].hyp); 
 
         }
-        // console.log(d);
-        hyps.sort(function(a,b){ //sort distances from input or hardcoded x,y from least to greatest (closest to furthest)
-          return a - b;
-        });
+
+        hyps.sort(function(a,b)
+                    { 
+                    
+                    return a - b;
+          
+                    }
+                 );
         
         arb.push.apply(d,arb);//add to sourced array arbitrary values that will hold ordered data
 
