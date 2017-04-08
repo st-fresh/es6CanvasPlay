@@ -85,18 +85,26 @@
         
         
         // console.log(d);
-        let [i,j,l,] = [0,0,d.length];
+        console.log(d[0].hyp);
+        let [i,j,k,l,] = [0,0,0,d.length];
         
         dist.sort(function(a,b){
           return a - b;
         })
-        // console.log(dist);
+        console.log(dist);
+        
+        let test1 = $.inArray(d[0].hyp, dist);
+        let test2 = $.inArray(d[1].hyp, dist);
+        
+        
+        // console.log(test1);
+        // console.log(d[12], dist[12]);
 
-//         for( i, j ; j < l ; ) {
+//         for( i, j, k; j < l ; i=k) {
 //         console.log(dist[i], d[j].hyp);
           
           
-// //           if (dist[i] == d[j].hyp) {
+// //           if (dist[i] === d[j].hyp) {
 // //             // d.push(d[j]);
 // //             // delete d[d.length].hyp;
 // //             // d.splice(j,1);
@@ -125,7 +133,8 @@
     function send() 
       {
       
-        let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
+        // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input
+        let [vx, vy] = [6, 33]; //hardcoded input
         // console.log(vx, vy);
         // console.log(d);
         // console.log(xvals);
@@ -139,8 +148,8 @@
           hyps.push(d[i].hyp); 
 
         }
-        
-        compare(d, hyps);
+        console.log(hyps);
+        // compare(d, hyps);
       
       }
 
