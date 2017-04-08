@@ -47,12 +47,12 @@
                   $.each(data, function( index, value ) 
                                  {
 
-                                 splitXY = (data[z].value).split(',');
-                                 //alert(splitXY[0]);
-                                 //alert(splitXY[1]);
-                                 xval.push(splitXY[0]);
-                                 yval.push(splitXY[1]);
-                                 z++ 
+                                   splitXY = (data[z].value).split(',');
+                                   //alert(splitXY[0]);
+                                   //alert(splitXY[1]);
+                                   xval.push(splitXY[0]);
+                                   yval.push(splitXY[1]);
+                                   z++ 
 
                                  });
 
@@ -273,11 +273,11 @@
  //.i/ Make Canvas funcs
   can = (a, d, {h, w}) => {
     
-                          let can    = d.createElement('canvas');
-                          can.height = h;
-                          can.width  = w;
+                            let can    = d.createElement('canvas');
+                            can.height = h;
+                            can.width  = w;
 
-                          return a.appendChild(can);
+                            return a.appendChild(can);
     
                           }
 
@@ -300,18 +300,17 @@
     // let b = Number("-");
     
      //error-catch for hardcoded X and Y inputs
-    $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
-    $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
+     $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
+     $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
         
-//      if ( $('#badX') || $('#badY') ) {
+     if ( $('#badX') || $('#badY') ) {
+       setTimeout(function() 
+                    {
+                      $('#badX').css('display','none');
+                      $('#badY').css('display','none');
+                    }, 2000);
 
-//      setTimeout(function() 
-//                   {
-//                   $('#badX').display = "none";
-//                   $('#badY').display = "none";
-//                   }, 1200);
-  
-//      }
+     }
      
      
     // iX.val() === 26 ? b=true : b=false;
@@ -346,7 +345,7 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
 //these run when START button clicked - they initialize the display
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
-W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:'<'});
+W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:'?',ryN:rY}); //test your own 'NUMBERS' on-page-load here
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
 // if(xInp)
