@@ -287,44 +287,30 @@
   inp = (a, {lX, iX, lY, iY}, ...r) => 
     {
     
-     let bad; 
-    
-     a.append(lX);
-     a.append(iX);
-     a.append(lY);
-     a.append(iY);
+      let bad; 
 
-     iX.val(Math.floor(r[0].rxN));
-     iY.val(Math.floor(r[0].ryN));
-    // let b = Number.isInteger(iX.val());
-    // let b = Number("-");
-    
-     //error-catch for hardcoded X and Y inputs
-     $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
-     $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
-        
-     if ( $('#badX') || $('#badY') ) {
-       setTimeout(function() 
-                    {
-                      $('#badX').css('display','none');
-                      $('#badY').css('display','none');
-                    }, 2000);
+      a.append(lX);
+      a.append(iX);
+      a.append(lY);
+      a.append(iY);
 
-     }
-     
-     
-    // iX.val() === 26 ? b=true : b=false;
-    // Number(b);
-     // console.log( typeof b, b);
-    // let c;
-    // b == NaN ? c =true : c = false;
-    // console.log(c);
+      iX.val(Math.floor(r[0].rxN));
+      iY.val(Math.floor(r[0].ryN));
 
-    // let d = $.isNumeric( b );
-    // console.log(d);
-     //return {}
+      //error-catch for hardcoded X and Y inputs --> see //III./ --> rX, rY
+      $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
+      $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
 
-     }
+      if ( $('#badX') || $('#badY') ) {
+        setTimeout(function() 
+                      {
+                        $('#badX').css('display','none');
+                        $('#badY').css('display','none');
+                      }, 2000);
+
+      }
+
+    }
   
   W.inp = inp;
 ////
@@ -333,6 +319,7 @@
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
+//I./
 const W    = window;
 const D    = document;
 const xLbl = "<u>X-Value</u>";
@@ -340,12 +327,13 @@ const xInp = $('<input id="valX" type="text" name="x" />');
 const yLbl = "<u>Y-Value</u>";
 const yInp = $('<input id="valY" type="text" name="y" />');
 var x,y;
-
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
 //these run when START button clicked - they initialize the display
+//II./
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
-W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:'?',ryN:rY}); //test your own 'NUMBERS' on-page-load here
+//III./
+W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //test your own 'NUMBERS' on-page-load here
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
 // if(xInp)
