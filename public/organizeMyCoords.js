@@ -88,7 +88,7 @@
      for( i, j ; i<l ; i++) {
        
       m = $.inArray(d[i].hyp, dist); //for d[0].hyp = 26, index in dist is 3 (m=3) // it's 3rd farthest
-      console.log(d.length, dist.length);
+      console.log(d[i].hyp);
        d[j+m] = d[i];
        
       
@@ -127,7 +127,7 @@
         for( i = 0 ; i < l ; i++ ) {
 
           [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
-          d[i].hyp = ( Math.floor(Math.sqrt(fvx + fvy)) ); //hypontenuse is a float, flooring here to match sourced json
+          d[i].hyp = ( Math.sqrt(fvx + fvy) ); //hypontenuse is a float, flooring here to match sourced json
           hyps.push(d[i].hyp); 
 
         }
