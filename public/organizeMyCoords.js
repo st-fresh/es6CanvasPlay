@@ -31,69 +31,55 @@
 ////ii./ Data gathered and returned to window method
   ((W, $, send, out) => 
     {  
-      var d, r;
-      function sender(callback) 
+    
+    var d, r;
+    function sender(callback) 
       {
-        
-        let [z, splitXY, xv, yv, xa, ya] = [0,,,,[],[]]; 
 
-        $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
+      let [z, splitXY, xv, yv, xa, ya] = [0,,,,[],[]]; 
 
+      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
         {
 
-        $.each(data, function( index, value ) 
-          {
+          $.each(data, function( index, value ) 
+            {
 
-          splitXY = (data[z].value).split(',');
-          //alert(splitXY[0]);
-          //alert(splitXY[1]);
-          xv = splitXY[0];
-          yv = splitXY[1];
-          xa.push(xv);
-          ya.push(yv);
-          z++ 
+            splitXY = (data[z].value).split(',');
+            //alert(splitXY[0]);
+            //alert(splitXY[1]);
+            xv = splitXY[0];
+            yv = splitXY[1];
+            xa.push(xv);
+            ya.push(yv);
+            z++ 
 
-          });
-        
+            });
+
         callback(data);
-          
+
         });
       }
-    
-      sender(function (data) 
-      {
-        
-        d = data;
-        send(d);
 
-      });
-    
-      function send(x) {
-        console.log(d);
-                  console.log(x,"test W.out");
+    sender(function (data) 
+           {
 
-        
-      }
-      // let raw = r;
+             d = data;
+             send(d);
+
+           });
+
+    function send(x) 
+    {
+
+      console.log(d);
+      console.log(x,"test W.out");
+
+    }
+
+    W.send = send;
       
-      // send(d);
-    
-//       out = () => 
-//         {
-//           // send();
-//           let s = send();
-//           console.log(r,"test W.out");
-//           // return s;
-        
-//         };
-// out();
-    
-      W.send = send;
-      // let 
-      // console.log(W.)
-      
-    
-    })(window, jQuery);
+    }
+  )(window, jQuery);
 
   // W.get = get;
   // let sender = get(_d);
@@ -101,11 +87,7 @@
   // console.log(sender);
     
  
-  send = () => {
-    // get(_d);
-    // let p = get(_d);
-    // console.log(p);
-  };
+
 // let a = get(_d); 
 //   // let s = get();
 //     // console.log(a.s);
