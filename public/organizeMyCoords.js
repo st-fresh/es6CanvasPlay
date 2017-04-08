@@ -1,19 +1,20 @@
 ((W, $, can, inp, _d, send) => 
   {  
-  
+
+////////////////////////////////
 ///////// SET PRIME UI ///////// 
 ////
- //i./ START button /// Click-Listener ///
-    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
+///i./ START button /// Click-Listener ///
+  let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
 
-    _Iui.append("<input type='button' id='run' value='START' />");
+  _Iui.append("<input type='button' id='run' value='START' />");
 
-    $( "#run" ).click(function() 
-                     {
+  $( "#run" ).click(function() 
+                   {
 
-                       send(); //send data to view
+                     //send(); //send data to view
 
-                     });
+                   });
 ////
 ///////// SET PRIME UI ///////// 
 ////////////////////////////////
@@ -23,37 +24,14 @@
     //
   // }
 
-///////// GET DATA ///////// 
-//// ** Responds to Click-Listener --> se at //i./ **
- //ii./ Data gathered and returned to window method
-
-// (function () 
-//  {
-
-//   var myData;
-
-//   function test(callback) {
-//     $.getJSON('notebook-json-data.php', function (data) {
-//       callback(data);
-//     });
-//   }
-
-//   test(function (data) {
-//     myData = data;
-//     autoPopulate('field', 'id');
-//   });
-
-//   function autoPopulate(field, id) {
-//     console.log(myData);
-//   }
-
-// });
-
-  ((W, $, send) => 
+//////////////////////////////////
+///////// GET DATA ////////////// 
+//// ** Responds to Click-Listener --> ///i./
+//// 
+///ii./ Data gathered and returned to window method
+  ((W, $, send, out, d) => 
     {  
       
-      var d;
-    
       function sender(callback) 
       {
         
@@ -93,7 +71,19 @@
       function send(field, id) {
         console.log(d);
       }
-      send();
+    
+      
+      out = () => 
+        {
+        
+          let s = send();
+          
+        return s;
+        
+        
+        };
+    
+      W.out = out;
       
     
     })(window, jQuery);
