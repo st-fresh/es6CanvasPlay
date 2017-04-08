@@ -41,19 +41,20 @@
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
         {
 
-          $.each(data, function( index, value ) 
-            {
+        $.each(data, function( index, value ) 
+          {
 
-            splitXY = (data[z].value).split(',');
-            //alert(splitXY[0]);
-            //alert(splitXY[1]);
-            xv = splitXY[0];
-            yv = splitXY[1];
-            xa.push(xv);
-            ya.push(yv);
-            z++ 
+          splitXY = (data[z].value).split(',');
+          //alert(splitXY[0]);
+          //alert(splitXY[1]);
+          xv = splitXY[0];
+          yv = splitXY[1];
+          data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
+          xa.push(xv);
+          ya.push(yv);
+          z++ 
 
-            });
+          });
 
         callback(data);
 
@@ -74,6 +75,7 @@
       console.log(d);
       console.log(x,"test W.out");
 
+
     }
 
     W.send = send;
@@ -81,26 +83,7 @@
     }
   )(window, jQuery);
 
-  // W.get = get;
-  // let sender = get(_d);
-   
-  // console.log(sender);
-    
- 
-
-// let a = get(_d); 
-//   // let s = get();
-//     // console.log(a.s);
-
-//   return _d;
-    
-//   }
   
-//   W.send = send;
-
-  
- // });
-
 //         //GIVEN
 //         let data = [
 //           {"id":"a","value":"31,49"}, //[0] index
@@ -237,7 +220,7 @@ W.can(D.getElementById("quads12"), D, {h:100,w:100});
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY});
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
-W.send(0);
+W.send(xInp, yInp);
 
 
 
