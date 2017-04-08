@@ -27,46 +27,46 @@
 //// ** Responds to Click-Listener --> se at //i./ **
  //ii./ Data gathered and returned to window method
 
-(function () 
- {
+// (function () 
+//  {
 
-  var myData;
+//   var myData;
 
-  function test(callback) {
-    $.getJSON('notebook-json-data.php', function (data) {
-      callback(data);
-    });
-  }
+//   function test(callback) {
+//     $.getJSON('notebook-json-data.php', function (data) {
+//       callback(data);
+//     });
+//   }
 
-  test(function (data) {
-    myData = data;
-    autoPopulate('field', 'id');
-  });
+//   test(function (data) {
+//     myData = data;
+//     autoPopulate('field', 'id');
+//   });
 
-  function autoPopulate(field, id) {
-    console.log(myData);
-  }
+//   function autoPopulate(field, id) {
+//     console.log(myData);
+//   }
 
-});
+// });
 
-  ((W, $, d, sender) => 
+  ((W, $, send) => 
     {  
-
+      
+      var d;
+    
       function sender(callback) 
       {
         
-        let [z, s, splitXY, xv, yv, xa, ya] = [0,,,,,[],[]]; 
+        let [z, splitXY, xv, yv, xa, ya] = [0,,,,[],[]]; 
 
         $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', function(data) 
 
         {
 
-        _d = data;
-
-        $.each(_d, function( index, value ) 
+        $.each(data, function( index, value ) 
           {
 
-          splitXY = (_d[z].value).split(',');
+          splitXY = (data[z].value).split(',');
           //alert(splitXY[0]);
           //alert(splitXY[1]);
           xv = splitXY[0];
@@ -76,10 +76,26 @@
           z++ 
 
           });
-
+        
+        callback(data);
+          
         });
       }
+    
+      sender(function (data) 
+      {
+        
+        d = data;
+        send('field', 'id');
+
+      });
+    
+      function send(field, id) {
+        console.log(d);
+      }
+      send();
       
+    
     })(window, jQuery);
 
   // W.get = get;
