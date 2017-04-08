@@ -47,12 +47,12 @@
                   $.each(data, function( index, value ) 
                                  {
 
-                                 splitXY = (data[z].value).split(',');
-                                 //alert(splitXY[0]);
-                                 //alert(splitXY[1]);
-                                 xval.push(splitXY[0]);
-                                 yval.push(splitXY[1]);
-                                 z++ 
+                                   splitXY = (data[z].value).split(',');
+                                   //alert(splitXY[0]);
+                                   //alert(splitXY[1]);
+                                   xval.push(splitXY[0]);
+                                   yval.push(splitXY[1]);
+                                   z++ 
 
                                  });
 
@@ -74,81 +74,50 @@
     function compare(d, dist) //d=sourced array, dist=distances
       {
         //this will be new coordinates.json after for-each adds hypotenueses 
-// g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":73}, {:83}, {:65}, {:89}]
 
-// g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":83}, {:65}, {:89}, {:og-73}, {:og-80}, {:og-83}]
-//func.sort(arr); //ascending
-        
-//arr is equal to [g[#].hyp, g[#].hyp];
- //                  /73/ ...    80 ... ascending ... 83 .. 89..
-                // i =    0          1                    2     3
-        
         
         // console.log(d);
-        console.log(d[0].hyp);
-        let [i,j,l,m, newD] = [0,0,d.length,,Array.from('12345678901234567890123456')];
+        let [i,j,l,m] = [0,26,dist.length,];
         
         
-        newD.push.apply(d,newD);//add to sourced array arbitrary values that will hold ordered data
+        // newD.push.apply(d,newD);//add to sourced array arbitrary values that will hold ordered data
         
-        dist.sort(function(a,b){ //sort distances from input or hardcoded x,y from least to greatest (closest to furthest)
-          return a - b;
-        })
-        // console.log(dist);
+        console.log(dist, d)
+        
+        // if()
+     for( i, j ; i<l ; i++) {
+       
+      m = $.inArray(d[i].hyp, dist); //for d[0].hyp = 26, index in dist is 3 (m=3) // it's 3rd farthest
+      console.log(d.length, dist.length);
+       d[j+m] = d[i];
+       
+      
+      //delete d[j+m].hyp; //comment-out this line to see order based on hyp prop
+
+     }
+        console.log(d)
+        
+//         
+
+    }
+
+  // console.log(dZ)
+
+
+
 
         
-        // let test2 = $.inArray(d[4].hyp, dist);
-        // console.log(d[0]);
-        console.log(d);
-        // d.push(d[4]);
-        // console.log(d);
         
-        //for( i,j; i<l; i++ ) {
-          
-          // m = $.inArray(d[i].hyp, dist);
-          
-        
-        //}
-        
-        
-        // console.log(match, d[26]);
-        // console.log(d[12], dist[12]);
 
-//         for( i, j, k; j < l ; i=k) {
-//         console.log(dist[i], d[j].hyp);
-          
-          
-// //           if (dist[i] === d[j].hyp) {
-// //             // d.push(d[j]);
-// //             // delete d[d.length].hyp;
-// //             // d.splice(j,1);
-// //             // i++;
-// //             // j = 0;
-// //           } else if (dist[i] !== d[j].hyp) {
 
-// //               j++;
-            
-// //             }
-          
-//         }
-          
-        //   -if loop i=0, j=0 i<arr.length    //i4 j0
-        // if(arr[i] === g[j].hyp) {
-        // g.push(g[j));//add to the end of coordinates.json
-        // delete g[g.length].hyp //remove the hyp prop to return to sourced format
-        // g.splice(j, 1);//
-        // i++;
-        // j=0; //reset j when a match is found to restart at 1st index
-        // }ELSE { 
-        // j++; }
         
-      }
+      // }
 
     function send() 
       {
       
         // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input
-        let [vx, vy] = [6, 33]; //hardcoded input
+        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hardcoded input
         // console.log(vx, vy);
         // console.log(d);
         // console.log(xvals);
@@ -162,6 +131,13 @@
           hyps.push(d[i].hyp); 
 
         }
+        // console.log(d);
+        hyps.sort(function(a,b){ //sort distances from input or hardcoded x,y from least to greatest (closest to furthest)
+          return a - b;
+        });
+        
+        arb.push.apply(d,arb);//add to sourced array arbitrary values that will hold ordered data
+
         // console.log(d);
         compare(d, hyps);
       
@@ -273,11 +249,11 @@
  //.i/ Make Canvas funcs
   can = (a, d, {h, w}) => {
     
-                          let can    = d.createElement('canvas');
-                          can.height = h;
-                          can.width  = w;
+                            let can    = d.createElement('canvas');
+                            can.height = h;
+                            can.width  = w;
 
-                          return a.appendChild(can);
+                            return a.appendChild(can);
     
                           }
 
@@ -287,45 +263,30 @@
   inp = (a, {lX, iX, lY, iY}, ...r) => 
     {
     
-     let bad; 
-    
-     a.append(lX);
-     a.append(iX);
-     a.append(lY);
-     a.append(iY);
+      let bad; 
 
-     iX.val(Math.floor(r[0].rxN));
-     iY.val(Math.floor(r[0].ryN));
-    // let b = Number.isInteger(iX.val());
-    // let b = Number("-");
-    
-     //error-catch for hardcoded X and Y inputs
-    $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
-    $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
-        
-//      if ( $('#badX') || $('#badY') ) {
+      a.append(lX);
+      a.append(iX);
+      a.append(lY);
+      a.append(iY);
 
-//      setTimeout(function() 
-//                   {
-//                   $('#badX').display = "none";
-//                   $('#badY').display = "none";
-//                   }, 1200);
-  
-//      }
-     
-     
-    // iX.val() === 26 ? b=true : b=false;
-    // Number(b);
-     // console.log( typeof b, b);
-    // let c;
-    // b == NaN ? c =true : c = false;
-    // console.log(c);
+      iX.val(Math.floor(r[0].rxN));
+      iY.val(Math.floor(r[0].ryN));
 
-    // let d = $.isNumeric( b );
-    // console.log(d);
-     //return {}
+      //error-catch for hardcoded X and Y inputs --> see //III./ --> rX, rY
+      $.isNumeric(iX.val()) ? $('input[name="x"]').css('font-weight', '900') : a.append("<span id='badX' style='color:red;'>ENTER A NUMBER</span>");
+      $.isNumeric(iY.val()) ? $('input[name="y"]').css('font-weight', '900') : a.append("<span id='badY' style='color:red;'>ENTER A NUMBER</span>");
 
-     }
+      if ( $('#badX') || $('#badY') ) {
+        setTimeout(function() 
+                      {
+                        $('#badX').css('display','none');
+                        $('#badY').css('display','none');
+                      }, 2000);
+
+      }
+
+    }
   
   W.inp = inp;
 ////
@@ -334,6 +295,7 @@
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
+//I./
 const W    = window;
 const D    = document;
 const xLbl = "<u>X-Value</u>";
@@ -341,12 +303,13 @@ const xInp = $('<input id="valX" type="text" name="x" />');
 const yLbl = "<u>Y-Value</u>";
 const yInp = $('<input id="valY" type="text" name="y" />');
 var x,y;
-
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
 //these run when START button clicked - they initialize the display
+//II./
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
-W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:'<'});
+//III./
+W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //test your own 'NUMBERS' on-page-load here
 //W.findHypo({xInp.val(), yInp.val()});
 // W.out(xInp.val(), yInp.val());
 // if(xInp)
