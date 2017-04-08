@@ -84,29 +84,31 @@
                 // i =    0          1                    2     3
         
         
-        console.log(d);
+        // console.log(d);
         let [i,j,l,] = [0,0,d.length];
         
         dist.sort(function(a,b){
           return a - b;
         })
-        console.log(dist);
+        // console.log(dist);
 
-        for( i, j ; j < l ; ) {
+//         for( i, j ; j < l ; ) {
+//         console.log(dist[i], d[j].hyp);
           
-          if (dist[i] == d[j].hyp) {
-            // d.push(d[j]);
-            // delete d[d.length].hyp;
-            // d.splice(j,1);
-            // i++;
-            // j = 0;
-          } else if (dist[i] !== d[j].hyp) {
+          
+// //           if (dist[i] == d[j].hyp) {
+// //             // d.push(d[j]);
+// //             // delete d[d.length].hyp;
+// //             // d.splice(j,1);
+// //             // i++;
+// //             // j = 0;
+// //           } else if (dist[i] !== d[j].hyp) {
 
-              j++;
+// //               j++;
             
-            }
+// //             }
           
-        }
+//         }
           
         //   -if loop i=0, j=0 i<arr.length    //i4 j0
         // if(arr[i] === g[j].hyp) {
@@ -142,18 +144,18 @@
       
       }
 
-    W.send = send;
+    // W.send = send;
     
     }
   )(window, jQuery);
   
 
 
-  runOnClick = (x,y) => {
+//   runOnClick = (x,y) => {
     
-    W.send();
+//     W.send();
     
-  }
+//   }
   
   
   
