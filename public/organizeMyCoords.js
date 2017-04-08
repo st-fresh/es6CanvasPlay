@@ -52,9 +52,6 @@
                                  //alert(splitXY[1]);
                                  xval.push(splitXY[0]);
                                  yval.push(splitXY[1]);
-                                 
-                                 // data[z].hyp = ( Math.floor(Math.sqrt(xv + yv)) );
-                                 //hyps.push(data[z].hyp); 
                                  z++ 
 
                                  });
@@ -73,21 +70,35 @@
              send();
 
            });
+    
+    function compare(d, dist)
+      {
+        
+        console.log(d, dist);
+        
+      }
 
     function send(x,y) 
-    {
-     let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
-      console.log(vx, vy);
-                    // Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal))
-      // g[z].hyp = ( Math.floor(Math.sqrt(hyx + hyy)) )
+      {
       
-      console.log(d);
-      console.log(xvals);
-      console.log(yvals);
+        let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value];
+        // console.log(vx, vy);
+        // console.log(d);
+        // console.log(xvals);
+        // console.log(yvals);
+        let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
+      
+        for( i = 0 ; i < l ; i++ ) {
 
-      // x.style.display = "none";
+          [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
+          d[i].hyp = ( Math.floor(Math.sqrt(fvx + fvy)) );
+          hyps.push(d[i].hyp); 
+
+        }
+        
+        compare(d, hyps);
       
-    }
+      }
 
     W.send = send;
     
