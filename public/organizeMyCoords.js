@@ -1,140 +1,174 @@
-//Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
-((W, $, can, inp, click) =>  //q=0) => 
-  {  
-
-////////////////////////////////
-///////// SET PRIME UI ///////// 
-////
-////i./ START button /// Click-Listener ///
-    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
-
-
-///////////////////////////////////////////////////////////
-///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
-////ii./  Responds to Click-Listener --> Review Data handling at ..?
-  
-  let display = (source) => 
+/// Coding Challenge by Jonathan James 
+/// ES6, JQuery, Canvas 
+/// See file *summary.md* for review
+///>>
+/////////////|
+/// SUMMARY /|
+//-->           This is a line with only a comment on it.
+//||||||||||||  As requested this Challenge includes a summary, 
+//|
+       //|||||  See summary file at *summary.md*
+///
+let k; //|||||  This is a global !
+///
+       //|||||  Enjoy your day !
+ //
+   let t; //||  This is local to some other function !
+ //
+       //|||||  Always reaching !
+       //|||||  This is what function declarations are inside of:
+//   
+  //{------------------------------------- 
+  //i./--> List .methods and funcs() used within.
+    let q = () =>
     {
 
+    };
+  //}-------------------------------------
+//
+//||||||||||||  Pay attention to roman numerals like i./, ii./, iii./ and so on..
+//||||||||||||  ..for soft-references by-name to other parts of code.
+//||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
+//              This is a line with nothing on it; typically preceding any other declaration; easily removable.
+/// END /////|
+/////////////|
+//
+//
+//-->  S T A R T
+//
+//
+//{------------------------------------- 
+///
+((W, $, can, inp, click) =>  
+  {  
+  // 
+  //
+    let _Iui = $('#inputUI');
+  //
+  //>>
+  //////////////////////////////////////////////////////////
+  /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+  //
+  //{-------------------------------------
+  //i./--> Print ordered data array to conole 
+  //--> .log(answer) /// commend-out to *   * at //ii??./ to add .hyp props back to data
+    let display = (source) => 
+    {
+    //
       let [DATA] = [source.splice(26, 52)]; 
-      //DATA represents the answer to this challenge without visual canvas representation, clean & BRANCH after you send to display!
-
+    //---> DATA represents the answer to this challenge.. 
+    //---> without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
+    // 
       console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
-      
-
-      
+    //--> .getContext /// .translate 
+      // prepCanvas(source);
+      //
     }
-  
+  //}-------------------------------------
+  //
+  ////{-------------------------------------
+  //ii./--> Draw Canvas
+  //   let prepCanvas = (source) => 
+  //     {
 
-  
-//   let prepCanvas = (source) => 
-//     {
-      
-//       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
-//       //--> got context
-//       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
-      
-//       ctx.translate (-424, -450); //move to center of a canvas
-// ctx.drawImage (image, 0, 0);
-      
-//       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
-//       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
-      
-      
-      
-      
-//       //carry through .hyp props on source by commenting-out ' delete d[j+m].hyp; ' at ////v./
-//       // console.log(source)
-      
-//       _Iui.append("<input type='button' id='run' value='START'>");
-  
-//       $( "#run" ).click(function() 
-//                           {
+  //       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
+  //       //--> got context
+  //       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
 
-//                             runOnClick(); //CRUNCH VALUES AGAIN
+  //       ctx.translate (-424, -450); //move to center of a canvas
+  // ctx.drawImage (image, 0, 0);
 
-//                           });
-  
-//     }
+  //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
+  //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+  //     }
+  ////{-------------------------------------
+  /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+  /////////////////////////////////////////////////////////
 
-//////////////////////////////////
-///////// GET & CRUNCH DATA ////////////// 
-////i./ Get data first --> Ensure it's ready for display 
+
+  ////////////////////////////////
+  /////// GET & CRUNCH DATA ////////////// 
+//{-------------------------------------
+//iii./ Get data first /// Ensure it's ready for display 
   ((W, $, send) => 
-    {  
-////ii./ Grab input-fields --> Set local-globals for data      
-
+  {  
+  //iii.i/--> Grab input-fields /// Set local-globals for data      
     let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
-    
-////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
+  //
+  //{-------------------------------------
+  //iii.ii/--> Grab data from coordinates.json /// function
     function sender(callback) 
-      {
-
+    {
+    //
       let [z, splitXY, xval, yval] = [0,, [], []]; 
-
+    //{-------------------------------------
+    //iii.iii/--> .getJSON requires full url /// .each  
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
-                function(data) 
-                  {
-
-                  $.each(data, function( index, value ) 
-                                 {
-
-                                   splitXY = (data[z].value).split(',');
-                                   xval.push(splitXY[0]);
-                                   yval.push(splitXY[1]);
-                                   z++ 
-
-                                 }
-                        );
-
-                  callback(data, xval, yval);
-
-                  }
+      function(data) 
+      {
+      //{-------------------------------------        
+        $.each(data, 
+        function( index, value ) 
+        {
+        //iiii.iv --> Split data into local-global vars xval, and yval /// .split .push
+          splitXY = (data[z].value).split(',');
+          xval.push(splitXY[0]);
+          yval.push(splitXY[1]);
+          z++ 
+        //
+        }
+      //}-------------------------------------
                );
+      //
+        callback(data, xval, yval);
+      //
       }
-
-////iv./ Pass datas with callback --> Call send() which calls compare() too
+    //}-------------------------------------
+             ); //--> Close .getJSON params
+      } //--> Close sender()
+    //}-------------------------------------
+    //
+         //{-------------------------------------
+         //iv./--> Pass datas with callback /// Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
-            
+           //--> .map .val send()
              d     = dREF     = data;
              xvals = xvalsREF = xval.map(Number);
              yvals = yvalsREF = yval.map(Number);
              inx   = $('#valX').val();
              iny   = $('#valY').val();
-      
+           //
              send(d, xvals, yvals,false,[6,33]); //pass hard-coded values by changing [6,33] to your desired values
              // send(d, xvals, yvals,false,[inx, iny]); //pass randomized values to matcher
-
-           }
-          );
-    
-////v./ Compare --> Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
+           } //--> Close callback
+         //}-------------------------------------
+          ); //--> Close sender params
+         //
+  //{-------------------------------------
+  //iii.v/--> Compare then Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
     function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
-      {
-// console.log(d)
-        let [i, j, l, m] = [0, 26, 0, ];
+    {
+      let [i, j, l, m] = [0, 26, 0, ];
+    //--> .inArray /// display()
+      for( i, j ; i<j ; i++) {
+    //
+        m = $.inArray(d[i].hyp, dist);
+    //
+        l++;
 
-        for( i, j ; i<j ; i++) {
+      //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
+        d[j+m] = d[i];
 
-          m = $.inArray(d[i].hyp, dist);
-          
-          l++;
+        delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
 
-        //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
-          d[j+m] = d[i];
-          
-          delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
-          
-          if (l === 26) {
+        if (l === 26) {
 
-            display(d); //for answer in console and rendered on page
-            
-            // prepCanvas(d); //un-comment this line to show answer drawn to canvas
-            
-              
-          }
+          display(d); //for answer in console and rendered on page
 
+          // prepCanvas(d); //un-comment this line to show answer drawn to canvas
+
+        }
 
         }
         
@@ -144,9 +178,10 @@
 
      send = (d, xvals, yvals, click, ...vs) =>
       {
-             d     = dREF;
-             xvals = xvalsREF;
-             yvals = yvalsREF;
+       
+       d     = dREF;
+       xvals = xvalsREF;
+       yvals = yvalsREF;
        // console.log(vs);
 /// RANDOM & HARD-CODED STATES /// --> see ////iv./
         let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
@@ -200,33 +235,39 @@
 
      W.send = send;
     
-    })(window, jQuery);
-  
+   })(window, jQuery);
+///  
+///////////////////////////  
+//// DYNAMIC-LISTENER ////
+  click = (x,y, inputs, clicker) => 
+    { 
+      //->>//SHOWER!!
+      clicker = false; 
+      let button; //console.log("test");
+      //--inputs->>
+      if($(inputs)){ 
+        //--->
+        button = $('#button');
+        //
+        console.log(button);
+        console.log(x.val(), y.val());
+        //--->
+      }
 
-
-//   runOnClick = (x,y) => {
-    
-//     W.send();
-    
-//   }
+      if(clicker) { 
+        //--->
+        return W.send(0,0,0,clicker,[x.val(),y.val()]);
+        //--->func
+      }
+      //
+    }
+///// DYNAMIC-LISTENER /////
+///////////////////////////  
   
-  click = (x,y, inputs) => { let clicked = false; let button; console.log("test");
-                    if($(inputs)){ 
-                        button = $('#button');//.children["0"].run;
-                      // button.get(4);
-                      
-                            console.log(button);
-console.log(x.val(), y.val());
-                      
-                    }
-         if(clicked) {           
-return W.send(0,0,0,clicked,[x.val(),y.val()]);
-     }
   
-  }
-  
+////
   W.click = click;
-
+///
   
 
 ///////// UI RENDER METHODS ///////// 
@@ -268,6 +309,7 @@ return W.send(0,0,0,clicked,[x.val(),y.val()]);
                       {
                         $('#badX').css('display','none');
                         $('#badY').css('display','none');
+          
                       }, 2000);
 
       }
@@ -277,7 +319,11 @@ return W.send(0,0,0,clicked,[x.val(),y.val()]);
   W.inp = inp;
 ////
 /////////////////URM/////////////////
-})(window, jQuery);
+  }
+)(window, jQuery);
+///
+//}-------------------------------------
+
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
 //I./
@@ -312,8 +358,10 @@ W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //
 
 $( "#button" ).click(function() 
                        {
+                         let clicked = true;//here we go
+                         W.click(xInp, yInp, $('#button'),clicked);
+                         console.log("non-immediate");
   
-                         W.click(xInp, yInp, $('#button'));
                         }
                     );
 
