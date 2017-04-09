@@ -1,3 +1,4 @@
+//Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
 ((W, $, can, inp, _d, send, runOnClick) => 
   {  
 
@@ -7,22 +8,30 @@
 ////i./ START button /// Click-Listener ///
     let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
 
-    _Iui.append("<input type='button' id='run' value='START'>");
+
+///////////////////////////////////////////////////////////
+///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+////??/
+  let prepCanvas = () => 
+    {
+      
+      let [can, ctx, r] = [$('canvas'), $("canvas")[0].getContext('2d'), 3]; //r--> radius of a point on canvas
+      //--> got context
+      [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
+      
+      
+      //--> only split off unordered source in coordinates.json if ready to send to display.. 
+      // console.log(ctx)
+      _Iui.append("<input type='button' id='run' value='START'>");
   
-    $( "#run" ).click(function() 
-                        {
+      $( "#run" ).click(function() 
+                          {
 
-                          runOnClick(); //CRUNCH VALUES AGAIN
+                            runOnClick(); //CRUNCH VALUES AGAIN
 
-                        });
-////
-///////// SET PRIME UI ///////// 
-////////////////////////////////
-
-  // let getCan = () => {
-    // let ctx = $("#myCanvas")[0].getContext('2d');
-    //
-  // }
+                          });
+  
+    }
 
 //////////////////////////////////
 ///////// GET & CRUNCH DATA ////////////// 
@@ -64,10 +73,9 @@
 ////iv./ Pass datas with callback --> Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
-
-             d     = data;
-             xvals = xval;
-             yvals = yval;
+            
+             [d, xvals, yvals] = [data, xval, yval]
+             
              send();
 
            }
@@ -90,6 +98,8 @@
 
         }
 
+        prepCanvas();
+
     }
 
 ////vi./ Send --> Prep and then Send data to compare() @ ////v./
@@ -97,7 +107,7 @@
     function send() 
       {
       
-        // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input
+        // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input 
         let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here
         
 //draw?/// TEST --> all should be defined before moving forward to compare() and/or draw()
@@ -109,9 +119,9 @@
         let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
       
         for( i = 0 ; i < l ; i++ ) {
-
+          //Math.abs() --> Accounts here for (-) values --> flips them across the X and/or Y axis for comparisons >> see *summary.md* 
           [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
-          d[i].hyp = ( Math.sqrt(fvx + fvy) ); //hypontenuse is a float, flooring here to match sourced json
+          d[i].hyp = ( Math.sqrt(fvx + fvy) ); //see *summary.md* file for why Math.floor() not used here
           hyps.push(d[i].hyp); 
 
         }
@@ -126,12 +136,11 @@
         
         arb.push.apply(d,arb);//add to sourced array arbitrary values that will hold ordered data
 
-        // console.log(d);
         compare(d, hyps);
       
       }
 
-    // W.send = send;
+//?    // W.send = send;
     
     }
   )(window, jQuery);
@@ -143,93 +152,6 @@
 //     W.send();
     
 //   }
-  
-  
-  
-  
-//         //GIVEN
-//         let data = [
-//           {"id":"a","value":"31,49"}, //[0] index
-//           {"id":"b","value":"44,67"} //[1] index
-//         ]
-
-        
-//         g[z].hyp = ( Math.floor(Math.sqrt(hyx + hyy)) )
-//         arr.push(g[z].hyp); //pushes each hypoteneuse value to an array for sorting least(closests) to greatest(farthest)
-//         //z++
-//         //END forEach
-
-//         console.log(g[z].hyp);
-
-//         //this will be new coordinates.json after for-each adds hypotenueses 
-//         g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":73}, {:83}, {:65}, {:89}]
-
-//         g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":83}, {:65}, {:89}, {:og-73}, {:og-80}, {:og-83}]
-//         //func.sort(arr); //ascending
-//         //arr is equal to [g[#].hyp, g[#].hyp];
-//          //                  /73/ ...    80 ... ascending ... 83 .. 89..
-//                         i =    0          1                    2     3
-
-
-        //go through matching hypotenuses coordinates.json (g) and arr that's in order
-        //for-if loop i=0, j=0 i<arr.length    //i4 j0
-          //if(arr[i] === g[j].hyp) {
-            //g.push(g[j));//add to the end of coordinates.json
-            //delete g[g.length].hyp //remove the hyp prop to return to sourced format
-            //g.splice(j, 1);//
-            //i++;
-            //j=0; //reset j when a match is found to restart at 1st index
-          //}ELSE { 
-          //j++; }
-          //end for-loop
-        
-//      W.check = check;
-
-        
-      
-  
-// "a" /:  "#i,#"ii
-// PSEUDO// 
-// var myarray=[25, 8, 7, 41]
-//           // 41  72  39  65
-//           //  a   b   c   d
-//           //
-// myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
-//     return a - b
-// })
-  
-//   xval 6 yval 33 //user input
-//    id   xv     yv
-//    a    31     49 //json
-//    b    44     67
-  
-  
-  
-///////// ALGORITHM METHODS : ARRAY MATCHING /////////
-// let doWork = function({ix, iy}) {    // url, {data, cache, headers}) {
-  
-//   let [z] = [0];
-//   let test = () => {data = data + "!"; 
-//   return data ;}
-//   data = test();
-
-//   return {url, data};
-  
-// }
-
-// let result = doWork("api/test", {data: "string",cache:false, headers:1});
-// //result.url = "api/test" , result.data = "string!"  
-  
-  
-//   //W.check();
-// //let [inxVal, inyVal] = [99, 20]; //input-field.val()
-// //add pythagorus' theory
-// let[z, g, hyx, hyy] = 
-//    [0, data, Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal)) ];
-// let arr = [];
-//forEach//
-
-  
   
 
 ///////// UI RENDER METHODS ///////// 
@@ -298,9 +220,6 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
 //III./
 W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //test your own 'NUMBERS' on-page-load here
-//W.findHypo({xInp.val(), yInp.val()});
-// W.out(xInp.val(), yInp.val());
-// if(xInp)
 // W.send();
 
 
@@ -317,12 +236,4 @@ W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //tes
 //add 
 
 
-//let W = window;
-//console.log(W.d, W.s);
-//let [init, data] = [W.start, W.data];
-
-//init();
-
-//let coords = W.data;
-//console.log(coords);
 
