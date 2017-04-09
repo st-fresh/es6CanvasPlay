@@ -71,7 +71,7 @@
 ////ii./ Grab input-fields --> Set local-globals for data
     inputs = $('#inputUI');
     
-    let d, og, xvals, yvals;
+    let d, xvals, yvals;
     
 ////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
     function sender(callback) 
@@ -105,10 +105,9 @@
            {
             
              d     = data;
-             og    = data;
              xvals = xval.map(Number);
              yvals = yval.map(Number);
-             send(d, og, xvals, yvals);
+             send(d, xvals, yvals);
 
            }
           );
@@ -117,20 +116,22 @@
     function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
       {
 // console.log(d)
-        let [i,j,l,m] = [0,26,dist.length,];
-        
-        for( i, j ; i<l ; i++) {
+        let [i, j, l, m] = [0, 26, 0, ];
+
+        for( i, j ; i<j ; i++) {
 
           m = $.inArray(d[i].hyp, dist);
           
-      //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
+          l++;
+
+        //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
           d[j+m] = d[i];
           
-          if (i=26) {
-            
-            // delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
-
-            // display(d); //for answer in console and rendered on page
+          delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
+          
+          if (l === 26) {
+console.log(d)
+            display(d); //for answer in console and rendered on page
             
             // prepCanvas(d); //un-comment this line to show answer drawn to canvas
             
@@ -144,14 +145,14 @@
 
 ////vi./ Send --> Prep and then Send data to compare() @ ////v./
 
-    function send(d, og, xvals, yvals) 
+    function send(d, xvals, yvals) 
       {
       
         // let [vx, vy, arb] = [inputs[0].children[2].value, inputs[0].children[4].value, Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
         
         let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
         
-        // let [vx, vy, arb] = [, , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
+        // let [vx, vy, arb] = [ , , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
         
        /// TEST --> all should be defined before moving forward to compare() and/or use canvas
        // console.log(vx, vy);
@@ -159,7 +160,7 @@
      // console.log(xvals);
     // console.log(yvals);
         
-        let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
+        let [fvx, fvy, hyps, i, l] = [ , , [], 0, xvals.length];
         // console.log(xvals, yvals)
         for( i ; i < l ; i++ ) {
           
@@ -172,7 +173,7 @@
           hyps.push(d[i].hyp); 
           
           if (hyps.length === 26) {
-            hyps.sort(function(a,b)
+            hyps.sort(function(a, b)
                         { 
                     
                           return a - b;
@@ -181,8 +182,8 @@
                      );
             
             arb.push.apply(d,arb); //add to sourced array arbitrary values that will hold ordered data
-            // console.log(d);
-            // compare(d, hyps);
+
+            compare(d, hyps);
             
           }
 
@@ -269,7 +270,7 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 //II./
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
 //III./
-W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //test your own 'NUMBERS' on-page-load here
+W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
 // W.send();
 
 
