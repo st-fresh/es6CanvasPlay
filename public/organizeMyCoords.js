@@ -17,7 +17,7 @@ let k; //|||||  This is a global
  //
        //|||||
        //|||||  This is what function declarations are inside of:
-//>>   
+///>>   
   //{------------------------------------- 
   //i./--> List .methods and funcs() used within
     let q = () =>
@@ -25,11 +25,11 @@ let k; //|||||  This is a global
 
     };
   //}-------------------------------------
-//>>
+///>>
 //||||||||||||  Pay attention to roman numerals like i./, ii./, iii./ and so on..
 //||||||||||||  ..for soft-references by-name to other parts of code.
 //||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
-//>> //|||||||  This is a line with nothing on it; typically preceding any other declaration
+///>> //||||||  This is a line with nothing on it; typically preceding any other declaration
 /// END /////|
 /////////////|
 
@@ -56,13 +56,13 @@ let k; //|||||  This is a global
     //---> DATA represents the answer to this challenge.. 
     //---> without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
     //>> 
-      // console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
+      console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
     //-->> .getContext /// .translate 
       // prepCanvas(source);
     //-->
     }
   //}-------------------------------------
-
+///>>
   ////{-------------------------------------
   //ii./
 //   let prepCanvas = (source) => 
