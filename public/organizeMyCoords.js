@@ -1,5 +1,5 @@
 //Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
-((W, $, can, inp, _d, click, runOnClick, q=0) => 
+((W, $, can, inp, click) =>  //q=0) => 
   {  
 
 ////////////////////////////////
@@ -21,14 +21,7 @@
 
       console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
       
-      if (q <= 0) { 
-        
-        _Iui.append("<input type='button' id='run' value='START'>");
-        
-      }
-      
-      
-      q++;
+
       
     }
   
@@ -110,8 +103,8 @@
              inx   = $('#valX').val();
              iny   = $('#valY').val();
       
-             // send(d, xvals, yvals,false,[6,33]); //pass hard-coded values here in this file
-             send(d, xvals, yvals,false,[inx, iny]); //pass hard-coded values here in this file
+             send(d, xvals, yvals,false,[6,33]); //pass hard-coded values by changing [6,33] to your desired values
+             // send(d, xvals, yvals,false,[inx, iny]); //pass randomized values to matcher
 
            }
           );
@@ -154,10 +147,9 @@
              d     = dREF;
              xvals = xvalsREF;
              yvals = yvalsREF;
-       console.log(vs);
+       // console.log(vs);
 /// RANDOM & HARD-CODED STATES /// --> see ////iv./
         let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
-        // console.log(vs[0], vs[1]);
 // USER-INPUT & RANDOM STATES //  
                //let [vx, vy, arb] = [(inputs[0].children[2]).val(), (inputs[0].children[4]).val(), Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
 
@@ -218,16 +210,18 @@
     
 //   }
   
-  click = (x,y) => {
-    
-      $( "#run" ).click(function() 
-                          { 
-      console.log("clicked");
-                            let clicked = true;
-                            W.send(0,0,0,clicked,[x.val(),y.val()]);
-      
-                          }
-                       );
+  click = (x,y, inputs) => { let clicked = false; let button; console.log("test");
+                    if($(inputs)){ 
+                        button = $('#button');//.children["0"].run;
+                      // button.get(4);
+                      
+                            console.log(button);
+console.log(x.val(), y.val());
+                      
+                    }
+         if(clicked) {           
+return W.send(0,0,0,clicked,[x.val(),y.val()]);
+     }
   
   }
   
@@ -260,6 +254,7 @@
       a.append(iX);
       a.append(lY);
       a.append(iY);
+      _Iui.append("<input type='button' id='button' value='START'>");
 
       iX.val(Math.floor(r[0].rxN));
       iY.val(Math.floor(r[0].ryN));
@@ -282,7 +277,6 @@
   W.inp = inp;
 ////
 /////////////////URM/////////////////
-  W.runOnClick = runOnClick;
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
@@ -302,7 +296,7 @@ W.can(D.getElementById("quads12"), D, {h:200,w:200});
 //III./
 W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
 //IV./
-W.click(xInp, yInp);
+// W.click(xInp, yInp, $('#button'));
 // $( "input[type='text']" ).change(function() 
 //                                    {
     
@@ -312,10 +306,16 @@ W.click(xInp, yInp);
 //                                 );
 
 
+// let newin = $('#button');
+// console.log(newin)
 
 
-
-
+$( "#button" ).click(function() 
+                       {
+  
+                         W.click(xInp, yInp, $('#button'));
+                        }
+                    );
 
 //makeUI
 //(function call)
