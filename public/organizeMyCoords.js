@@ -1,9 +1,9 @@
 /// Coding Challenge by Jonathan James 
 /// ES6, JQuery, Canvas 
-/// See file 'summary.md' for review
+/// See file *summary.md* for review
 
 /////////////////////
-/// SUMMARY GUIDE ///
+/// SUMMARY ///
 //|
 //|  As requested this Challenge includes a summary 
 //|
@@ -20,7 +20,7 @@ let k; //This is a global
 //| Pat attend to romain numerals i./, ii./, iii./ for soft references by name to other parts of code
 //| Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram
 //|
-/// END GUIDE ///
+/// END ///
 /////////////////////
 
 
@@ -30,24 +30,26 @@ let k; //This is a global
 ///
  // 
   //
-    let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
+    let _Iui = $('#inputUI');
   //
 
 ///////////////////////////////////////////////////////////
 ///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
-////ii./  Responds to Click-Listener --> Review Data handling at ..?
-  
-  let display = (source) => 
-    {
-
-      let [DATA] = [source.splice(26, 52)]; 
-      //DATA represents the answer to this challenge without visual canvas representation, clean & BRANCH after you send to display!
-
-      console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
-      
-
-      
-    }
+////
+  //i./ Print ordered data array to conole &&|| Draw Canvas
+    let display = (source) => 
+      //--> .log(answer) /// commend-out to *   * at //ii./ to add .hyp props back to data
+      {
+  //
+        let [DATA] = [source.splice(26, 52)]; 
+          // DATA represents the answer to this challenge 
+         // without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
+        //>> 
+         console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
+      //-->> .getContext /// .translate 
+        // prepCanvas(source);
+      //-->
+      }
   
 
   
@@ -63,23 +65,12 @@ let k; //This is a global
       
 //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
 //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
-      
-      
-      
-      
-//       //carry through .hyp props on source by commenting-out ' delete d[j+m].hyp; ' at ////v./
-//       // console.log(source)
-      
-//       _Iui.append("<input type='button' id='run' value='START'>");
-  
-//       $( "#run" ).click(function() 
-//                           {
-
-//                             runOnClick(); //CRUNCH VALUES AGAIN
-
-//                           });
-  
 //     }
+    
+    
+///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+///////////////////////////////////////////////////////////
+
 
 //////////////////////////////////
 ///////// GET & CRUNCH DATA ////////////// 
