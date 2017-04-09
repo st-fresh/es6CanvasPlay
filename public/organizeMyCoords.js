@@ -4,55 +4,67 @@
 
 /////////////////////
 /// SUMMARY ///
+//>> //|||||||  This is a line with nothing on it; typically preceding any other declaration.
+//||||||||||||  As requested this Challenge includes a summary 
 //|
-//|  As requested this Challenge includes a summary 
-//|
-       //|
+       //|||||  See summary file at *summary.md*
 ///
-let k; //This is a global
+let k; //|||||  This is a global
 ///
-       //|
+       //|||||  Enjoy your day !
  //
-   let t; //This is local to some other function
+   let t; //||  This is local to some other function
  //
-       //|
+       //|||||
+       //|||||  This is what function declarations are inside of:
+//>>   
+  //{------------------------------------- 
+  //i./--> List .methods and funcs() used within
+    let q = () =>
+    {
 
-//| Pay attention to roman numerals i./, ii./, iii./ for soft-references by-name to other parts of code
-//| Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram
-//|
+    };
+  //}-------------------------------------
+//>>
+//||||||||||||  Pay attention to roman numerals like i./, ii./, iii./ and so on..
+//||||||||||||  for soft-references by-name to other parts of code.
+//||||||||||||  Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram.
+//>> //|||||||  This is a line with nothing on it; typically preceding any other declaration
 /// END ///
 /////////////////////
 
 
 ///
 ((W, $, can, inp, click) =>  
-  {  
+{  
 ///
- // 
+ //>> 
   //
     let _Iui = $('#inputUI');
   //
 
-///////////////////////////////////////////////////////////
-///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
-////
-  //i./ Print ordered data array to conole &&|| Draw Canvas
-    let display = (source) => 
-      //--> .log(answer) /// commend-out to *   * at //ii./ to add .hyp props back to data
-      {
+  //////////////////////////////////////////////////////////
+  /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   //
-        let [DATA] = [source.splice(26, 52)]; 
-          // DATA represents the answer to this challenge 
-         // without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
-        //>> 
-         console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
-      //-->> .getContext /// .translate 
-        // prepCanvas(source);
-      //-->
-      }
-  
+  //{-------------------------------------
+  //i./ Print ordered data array to conole &&|| Draw Canvas
+  //--> .log(answer) /// commend-out to *   * at //ii??./ to add .hyp props back to data
+    let display = (source) => 
+    {
+    //>>
+      let [DATA] = [source.splice(26, 52)]; 
+    //---> DATA represents the answer to this challenge.. 
+    //---> without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
+    //>> 
+      // console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
+    //-->> .getContext /// .translate 
+      // prepCanvas(source);
+    //-->
+    }
+  //}-------------------------------------
 
-  
+  ////{-------------------------------------
+  //ii./
 //   let prepCanvas = (source) => 
 //     {
       
@@ -66,52 +78,60 @@ let k; //This is a global
 //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
 //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
 //     }
+  ////{-------------------------------------
+
     
-    
-///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
-///////////////////////////////////////////////////////////
+  /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+  /////////////////////////////////////////////////////////
 
 
-//////////////////////////////////
-///////// GET & CRUNCH DATA ////////////// 
-////i./ Get data first --> Ensure it's ready for display 
+  ////////////////////////////////
+  /////// GET & CRUNCH DATA ////////////// 
+//{-------------------------------------
+//iii./ Get data first /// Ensure it's ready for display 
   ((W, $, send) => 
-    {  
-////ii./ Grab input-fields --> Set local-globals for data      
-
+  {  
+  //iii.i/ Grab input-fields /// Set local-globals for data      
     let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
-    
-////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
+  //
+  //{-------------------------------------
+  //iii.ii/ Grab data from coordinates.json /// function
     function sender(callback) 
-      {
-
+    {
+    //
       let [z, splitXY, xval, yval] = [0,, [], []]; 
-
+    //{-------------------------------------
+    //iii.iii/ .getJSON requires full url /// .each  
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
-                function(data) 
-                  {
+      function(data) 
+      {
+                   //{-------------------------------------        
+        $.each(data, function( index, value ) 
+                     {
+                   //--> Split data into local-global vars xval, and yval /// .split .push
+                       splitXY = (data[z].value).split(',');
+                       xval.push(splitXY[0]);
+                       yval.push(splitXY[1]);
+                       z++ 
+                   //>>
+                     }
+                   //}-------------------------------------
 
-                  $.each(data, function( index, value ) 
-                                 {
-
-                                   splitXY = (data[z].value).split(',');
-                                   xval.push(splitXY[0]);
-                                   yval.push(splitXY[1]);
-                                   z++ 
-
-                                 }
-                        );
-
-                  callback(data, xval, yval);
-
-                  }
-               );
-      }
-
-////iv./ Pass datas with callback --> Call send() which calls compare() too
+              );
+      //>>
+        callback(data, xval, yval);
+      //>>
+        }
+      //}-------------------------------------
+               ); //--> Close .getJSON
+      } //--> Close sender()
+    //}-------------------------------------
+    //>>
+         //{-------------------------------------
+         //iv./--> Pass datas with callback /// Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
-            
+          //--> .map .val send()
              d     = dREF     = data;
              xvals = xvalsREF = xval.map(Number);
              yvals = yvalsREF = yval.map(Number);
