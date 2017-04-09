@@ -110,7 +110,7 @@ let k; //|||||  This is a global
         $.each(data, 
         function( index, value ) 
         {
-        //--> Split data into local-global vars xval, and yval /// .split .push
+        //iiii.iv --> Split data into local-global vars xval, and yval /// .split .push
           splitXY = (data[z].value).split(',');
           xval.push(splitXY[0]);
           yval.push(splitXY[1]);
@@ -118,13 +118,13 @@ let k; //|||||  This is a global
         //>>
         }
       //}-------------------------------------
-              );
+               );
       //>>
         callback(data, xval, yval);
       //>>
       }
     //}-------------------------------------
-               ); //--> Close .getJSON
+             ); //--> Close .getJSON params
       } //--> Close sender()
     //}-------------------------------------
     //>>
@@ -132,18 +132,18 @@ let k; //|||||  This is a global
          //iv./--> Pass datas with callback /// Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
-          //--> .map .val send()
+           //--> .map .val send()
              d     = dREF     = data;
              xvals = xvalsREF = xval.map(Number);
              yvals = yvalsREF = yval.map(Number);
              inx   = $('#valX').val();
              iny   = $('#valY').val();
-      
+           //>>
              send(d, xvals, yvals,false,[6,33]); //pass hard-coded values by changing [6,33] to your desired values
              // send(d, xvals, yvals,false,[inx, iny]); //pass randomized values to matcher
-
-           }
-          );
+           } //--> Close callback
+         //}-------------------------------------
+          ); //--> Close sender params
     
 ////v./ Compare --> Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
     function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
