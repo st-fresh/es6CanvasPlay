@@ -1,12 +1,10 @@
-/// Coding Challenge by Jonathan James 
-/// ES6, JQuery, Canvas 
-/// See file *summary.md* for review
-///>>
-/////////////|
-/// SUMMARY /|
+/////////////|  Coding Challenge by Jonathan James 
+/////////////|  ES6, JQuery, Canvas 
+/////////////|  See file *summary.md* for review
+//
+/// SUMMARY ||
 //-->           This is a line with only a comment on it.
 //||||||||||||  As requested this Challenge includes a summary, 
-//|
        //|||||  See summary file at *summary.md*
 ///
 let k; //|||||  This is a global !
@@ -22,7 +20,7 @@ let k; //|||||  This is a global !
   //i./--> List .methods and funcs() used within.
     let q = () =>
     {
-
+    // @mrdignitty
     };
   //}-------------------------------------
 //
@@ -31,7 +29,6 @@ let k; //|||||  This is a global !
 //||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
 //              This is a line with nothing on it; typically preceding any other declaration; easily removable.
 /// END /////|
-/////////////|
 //
 //
 //-->  S T A R T
@@ -51,7 +48,7 @@ let k; //|||||  This is a global !
   //
   //{-------------------------------------
   //i./--> Print ordered data array to conole 
-  //--> .log(answer) /// commend-out to *   * at //ii??./ to add .hyp props back to data
+  //--> .log(answer) ||| commend-out to *   * at //ii??./ to add .hyp props back to data
     let display = (source) => 
     {
     //
@@ -63,7 +60,7 @@ let k; //|||||  This is a global !
     //--> .getContext /// .translate 
       // prepCanvas(source);
       //
-    }
+    } //--> Close source()
   //}-------------------------------------
   //
   ////{-------------------------------------
@@ -89,20 +86,20 @@ let k; //|||||  This is a global !
   ////////////////////////////////
   /////// GET & CRUNCH DATA ////////////// 
 //{-------------------------------------
-//iii./ Get data first /// Ensure it's ready for display 
+//iii./ Get data first ||| Ensure it's ready for display 
   ((W, $, send) => 
   {  
-  //iii.i/--> Grab input-fields /// Set local-globals for data      
+  //iii.i/--> Grab input-fields ||| Set local-globals for data      
     let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
   //
   //{-------------------------------------
-  //iii.ii/--> Grab data from coordinates.json /// function
+  //iii.ii/--> Grab data from coordinates.json ||| sender(callback)
     function sender(callback) 
     {
     //
       let [z, splitXY, xval, yval] = [0,, [], []]; 
     //{-------------------------------------
-    //iii.iii/--> .getJSON requires full url /// .each  
+    //iii.iii/--> .getJSON requires full url ||| .each | callback() 
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
       function(data) 
       {
@@ -110,7 +107,7 @@ let k; //|||||  This is a global !
         $.each(data, 
         function( index, value ) 
         {
-        //iiii.iv --> Split data into local-global vars xval, and yval /// .split .push
+        //iiii.iv --> Split data into local-global vars xval, and yval /// .value | .split | .push
           splitXY = (data[z].value).split(',');
           xval.push(splitXY[0]);
           yval.push(splitXY[1]);
@@ -122,7 +119,7 @@ let k; //|||||  This is a global !
       //
         callback(data, xval, yval);
       //
-      }
+      } //--> Close anonymous .getJSON function() param
     //}-------------------------------------
              ); //--> Close .getJSON params
       } //--> Close sender()
@@ -235,7 +232,7 @@ let k; //|||||  This is a global !
 
      W.send = send;
     
-   })(window, jQuery);
+   })(window, jQuery); //Close //iii./
 ///  
 ///////////////////////////  
 //// DYNAMIC-LISTENER ////
