@@ -1,3 +1,4 @@
+//Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
 ((W, $, can, inp, _d, send, runOnClick) => 
   {  
 
@@ -7,34 +8,72 @@
 ////i./ START button /// Click-Listener ///
     let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
 
-    _Iui.append("<input type='button' id='run' value='START'>");
+
+///////////////////////////////////////////////////////////
+///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
+////ii./  Responds to Click-Listener --> Review Data handling at ..?
   
+  let display = (source) => 
+    {
+// console.log(source);
+    let [DATA] = [];
+
+    DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+      
+    //ANSWER IN CONSOLE
+    // console.log(DATA);
+    _Iui.append("<input type='button' id='run' value='START'>");
+
     $( "#run" ).click(function() 
                         {
 
                           runOnClick(); //CRUNCH VALUES AGAIN
 
-                        });
-////
-///////// SET PRIME UI ///////// 
-////////////////////////////////
+                        }
+                     );
 
-  // let getCan = () => {
-    // let ctx = $("#myCanvas")[0].getContext('2d');
-    //
-  // }
+  }
+  
+//   let prepCanvas = (source) => 
+//     {
+      
+//       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
+//       //--> got context
+//       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
+      
+      
+      
+//       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
+//       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+      
+      
+      
+      
+//       //carry through .hyp props on source by commenting-out ' delete d[j+m].hyp; ' at ////v./
+//       // console.log(source)
+      
+//       _Iui.append("<input type='button' id='run' value='START'>");
+  
+//       $( "#run" ).click(function() 
+//                           {
+
+//                             runOnClick(); //CRUNCH VALUES AGAIN
+
+//                           });
+  
+//     }
 
 //////////////////////////////////
-///////// GET DATA ////////////// 
-//// ** Responds to Click-Listener --> ///i./
-//// 
-////ii./ Data gathered and returned to window method
+///////// GET & CRUNCH DATA ////////////// 
+////i./ Get data first --> Ensure it's ready for display 
   ((W, $, send, out, inputs) => 
     {  
-    
+////ii./ Grab input-fields --> Set local-globals for data
     inputs = $('#inputUI');
-    var d, xvals, yvals;
     
+    let d, xvals, yvals;
+    
+////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
     function sender(callback) 
       {
 
@@ -48,102 +87,111 @@
                                  {
 
                                    splitXY = (data[z].value).split(',');
-                                   //alert(splitXY[0]);
-                                   //alert(splitXY[1]);
                                    xval.push(splitXY[0]);
                                    yval.push(splitXY[1]);
                                    z++ 
 
-                                 });
+                                 }
+                        );
 
                   callback(data, xval, yval);
 
-                  });
+                  }
+               );
       }
 
+////iv./ Pass datas with callback --> Call send() which calls compare() too
     sender(function (data, xval, yval) 
            {
+            
+             d     = data;
+             xvals = xval.map(Number);
+             yvals = yval.map(Number);
+             send(d, xvals, yvals);
 
-             d = data;
-             xvals = xval;
-             yvals = yval;
-             send();
-
-           });
+           }
+          );
     
-    function compare(d, dist) //d=sourced array, dist=distances
+////v./ Compare --> Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
+    function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
       {
-        //this will be new coordinates.json after for-each adds hypotenueses 
+// console.log(d)
+        let [i, j, l, m] = [0, 26, 0, ];
 
-        
-        // console.log(d);
-        let [i,j,l,m] = [0,26,dist.length,];
-        
-        
-        // newD.push.apply(d,newD);//add to sourced array arbitrary values that will hold ordered data
-        
-        console.log(dist, d)
-        
-        // if()
-     for( i, j ; i<l ; i++) {
-       
-      m = $.inArray(d[i].hyp, dist); //for d[0].hyp = 26, index in dist is 3 (m=3) // it's 3rd farthest
-      console.log(d.length, dist.length);
-       d[j+m] = d[i];
-       
-      
-      //delete d[j+m].hyp; //comment-out this line to see order based on hyp prop
+        for( i, j ; i<j ; i++) {
 
-     }
-        console.log(d)
-        
-//         
+          m = $.inArray(d[i].hyp, dist);
+          
+          l++;
 
-    }
+        //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
+          d[j+m] = d[i];
+          
+          delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
+          
+          if (l === 26) {
+console.log(d)
+            display(d); //for answer in console and rendered on page
+            
+            // prepCanvas(d); //un-comment this line to show answer drawn to canvas
+            
+              
+          }
 
-  // console.log(dZ)
-
-
-
-
-        
-        
-
-
-        
-      // }
-
-    function send() 
-      {
-      
-        // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input
-        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hardcoded input
-        // console.log(vx, vy);
-        // console.log(d);
-        // console.log(xvals);
-        // console.log(yvals);
-        let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
-      
-        for( i = 0 ; i < l ; i++ ) {
-
-          [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
-          d[i].hyp = ( Math.floor(Math.sqrt(fvx + fvy)) ); //hypontenuse is a float, flooring here to match sourced json
-          hyps.push(d[i].hyp); 
 
         }
-        // console.log(d);
-        hyps.sort(function(a,b){ //sort distances from input or hardcoded x,y from least to greatest (closest to furthest)
-          return a - b;
-        });
         
-        arb.push.apply(d,arb);//add to sourced array arbitrary values that will hold ordered data
+      }
 
-        // console.log(d);
-        compare(d, hyps);
+////vi./ Send --> Prep and then Send data to compare() @ ////v./
+
+    function send(d, xvals, yvals) 
+      {
+      
+        // let [vx, vy, arb] = [inputs[0].children[2].value, inputs[0].children[4].value, Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
+        
+        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
+        
+        // let [vx, vy, arb] = [ , , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
+        
+       /// TEST --> all should be defined before moving forward to compare() and/or use canvas
+       // console.log(vx, vy);
+      // console.log(d);
+     // console.log(xvals);
+    // console.log(yvals);
+        
+        let [fvx, fvy, hyps, i, l] = [ , , [], 0, xvals.length];
+        // console.log(xvals, yvals)
+        for( i ; i < l ; i++ ) {
+          
+          //Math.abs() --> Accounts here for (-) values --> Finds positive magnitude >> see *summary.md*
+          fvx = Math.abs( (xvals[i] - vx)*(xvals[i] - vx) );
+          fvy = Math.abs( (yvals[i] - vy)*(yvals[i] - vy) );
+
+          d[i].hyp = Math.sqrt(fvx + fvy); //see *summary.md* file for why Math.floor() not used here
+
+          hyps.push(d[i].hyp); 
+          
+          if (hyps.length === 26) {
+            hyps.sort(function(a, b)
+                        { 
+                    
+                          return a - b;
+          
+                        }
+                     );
+            
+            arb.push.apply(d,arb); //add to sourced array arbitrary values that will hold ordered data
+
+            compare(d, hyps);
+            
+          }
+
+        }
       
       }
 
-    // W.send = send;
+//?    // W.send = send;
     
     }
   )(window, jQuery);
@@ -155,93 +203,6 @@
 //     W.send();
     
 //   }
-  
-  
-  
-  
-//         //GIVEN
-//         let data = [
-//           {"id":"a","value":"31,49"}, //[0] index
-//           {"id":"b","value":"44,67"} //[1] index
-//         ]
-
-        
-//         g[z].hyp = ( Math.floor(Math.sqrt(hyx + hyy)) )
-//         arr.push(g[z].hyp); //pushes each hypoteneuse value to an array for sorting least(closests) to greatest(farthest)
-//         //z++
-//         //END forEach
-
-//         console.log(g[z].hyp);
-
-//         //this will be new coordinates.json after for-each adds hypotenueses 
-//         g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":73}, {:83}, {:65}, {:89}]
-
-//         g = [{"id":"a","value":"31,49", "hyp":80}, {"id":"a","value":"31,49", "hyp":83}, {:65}, {:89}, {:og-73}, {:og-80}, {:og-83}]
-//         //func.sort(arr); //ascending
-//         //arr is equal to [g[#].hyp, g[#].hyp];
-//          //                  /73/ ...    80 ... ascending ... 83 .. 89..
-//                         i =    0          1                    2     3
-
-
-        //go through matching hypotenuses coordinates.json (g) and arr that's in order
-        //for-if loop i=0, j=0 i<arr.length    //i4 j0
-          //if(arr[i] === g[j].hyp) {
-            //g.push(g[j));//add to the end of coordinates.json
-            //delete g[g.length].hyp //remove the hyp prop to return to sourced format
-            //g.splice(j, 1);//
-            //i++;
-            //j=0; //reset j when a match is found to restart at 1st index
-          //}ELSE { 
-          //j++; }
-          //end for-loop
-        
-//      W.check = check;
-
-        
-      
-  
-// "a" /:  "#i,#"ii
-// PSEUDO// 
-// var myarray=[25, 8, 7, 41]
-//           // 41  72  39  65
-//           //  a   b   c   d
-//           //
-// myarray.sort(function(a,b){ //Array now becomes [7, 8, 25, 41]
-//     return a - b
-// })
-  
-//   xval 6 yval 33 //user input
-//    id   xv     yv
-//    a    31     49 //json
-//    b    44     67
-  
-  
-  
-///////// ALGORITHM METHODS : ARRAY MATCHING /////////
-// let doWork = function({ix, iy}) {    // url, {data, cache, headers}) {
-  
-//   let [z] = [0];
-//   let test = () => {data = data + "!"; 
-//   return data ;}
-//   data = test();
-
-//   return {url, data};
-  
-// }
-
-// let result = doWork("api/test", {data: "string",cache:false, headers:1});
-// //result.url = "api/test" , result.data = "string!"  
-  
-  
-//   //W.check();
-// //let [inxVal, inyVal] = [99, 20]; //input-field.val()
-// //add pythagorus' theory
-// let[z, g, hyx, hyy] = 
-//    [0, data, Math.abs((31 - inxVal)*(31 - inxVal)),  Math.abs((49 - inyVal)*(49 - inyVal)) ];
-// let arr = [];
-//forEach//
-
-  
   
 
 ///////// UI RENDER METHODS ///////// 
@@ -309,10 +270,7 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 //II./
 W.can(D.getElementById("quads12"), D, {h:100,w:100});
 //III./
-W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //test your own 'NUMBERS' on-page-load here
-//W.findHypo({xInp.val(), yInp.val()});
-// W.out(xInp.val(), yInp.val());
-// if(xInp)
+W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
 // W.send();
 
 
@@ -329,12 +287,4 @@ W.inp($('#inputUI'), {lX:xLbl,iX:xInp,lY:yLbl, iY:yInp}, {rxN:rX,ryN:rY}); //tes
 //add 
 
 
-//let W = window;
-//console.log(W.d, W.s);
-//let [init, data] = [W.start, W.data];
-
-//init();
-
-//let coords = W.data;
-//console.log(coords);
 
