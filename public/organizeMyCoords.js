@@ -131,10 +131,8 @@
             display(d); //for answer in console and rendered on page
             
             // prepCanvas(d); //un-comment this line to show answer drawn to canvas
-            
               
           }
-
 
         }
         
@@ -144,9 +142,10 @@
 
      send = (d, xvals, yvals, click, ...vs) =>
       {
-             d     = dREF;
-             xvals = xvalsREF;
-             yvals = yvalsREF;
+       
+       d     = dREF;
+       xvals = xvalsREF;
+       yvals = yvalsREF;
        // console.log(vs);
 /// RANDOM & HARD-CODED STATES /// --> see ////iv./
         let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
@@ -202,31 +201,37 @@
     
     })(window, jQuery);
   
+///////////////////////////  
+//// DYNAMIC-LISTENER ////
+  click = (x,y, inputs, clicker) => 
+    { 
+      //->>//SHOWER!!
+      clicker = false; 
+      let button; //console.log("test");
+      //--inputs->>
+      if($(inputs)){ 
+        //--->
+        button = $('#button');
+        //
+        console.log(button);
+        console.log(x.val(), y.val());
+        //--->
+      }
 
-
-//   runOnClick = (x,y) => {
-    
-//     W.send();
-    
-//   }
+      if(clicker) { 
+        //--->
+        return W.send(0,0,0,clicker,[x.val(),y.val()]);
+        //--->func
+      }
+      //
+    }
+///// DYNAMIC-LISTENER /////
+///////////////////////////  
   
-  click = (x,y, inputs) => { let clicked = false; let button; console.log("test");
-                    if($(inputs)){ 
-                        button = $('#button');//.children["0"].run;
-                      // button.get(4);
-                      
-                            console.log(button);
-console.log(x.val(), y.val());
-                      
-                    }
-         if(clicked) {           
-return W.send(0,0,0,clicked,[x.val(),y.val()]);
-     }
   
-  }
-  
+////
   W.click = click;
-
+///
   
 
 ///////// UI RENDER METHODS ///////// 
@@ -268,6 +273,7 @@ return W.send(0,0,0,clicked,[x.val(),y.val()]);
                       {
                         $('#badX').css('display','none');
                         $('#badY').css('display','none');
+          
                       }, 2000);
 
       }
@@ -312,8 +318,10 @@ W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //
 
 $( "#button" ).click(function() 
                        {
+                         let clicked = true;//here we go
+                         W.click(xInp, yInp, $('#button'),clicked);
+                         console.log("non-immediate");
   
-                         W.click(xInp, yInp, $('#button'));
                         }
                     );
 
