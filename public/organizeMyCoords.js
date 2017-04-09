@@ -17,7 +17,7 @@ let k; //This is a global
  //
        //|
 
-//| Pat attend to romain numerals i./, ii./, iii./ for soft references by name to other parts of code
+//| Pay attention to roman numerals i./, ii./, iii./ for soft-references by-name to other parts of code
 //| Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram
 //|
 /// END ///
