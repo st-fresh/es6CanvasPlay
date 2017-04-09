@@ -28,7 +28,7 @@ let k; //|||||  This is a global !
 //||||||||||||  ..for soft-references by-name to other parts of code.
 //||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
 //              This is a line with nothing on it; typically preceding any other declaration; easily removable.
-/// END /////|
+/// END //||||
 //
 //
 //-->  S T A R T
@@ -361,16 +361,5 @@ $( "#button" ).click(function()
   
                         }
                     );
-
-//makeUI
-//(function call)
-
-//draw data on canvas for a random point
-//(function loads a random data point and finds closest points and draws lines to them)
-
-//add blinking-text "enter your coords to see what ids are close-by!"
-//draw red around inputs and bold "X" and "Y" labes
-//add 
-
-
-
+//
+//-->  E N D
