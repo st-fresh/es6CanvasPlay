@@ -50,13 +50,14 @@ let k; //|||||  This is a global !
   //
   //{-------------------------------------
   //i./--> Print ordered data array to console ||| see //iii.vi/
-  //--> .log(answer) ||| at //iii.v/ commend-out ' delete d[j+m].hyp; ' to add .hyp props back to data.
+  //--> .log(answer) ||| at //iii.v/ comment-out: ' delete d[j+m].hyp; ' to add .hyp props back to data.
+  //--> .splice | .stringify | .append | .innerHTML
     let display = (source, clicked) => 
     {
     //
-      let DATA = source.splice(26, 52), f = $('footer'),stringJSON =  JSON.stringify(DATA, null, "  ");
+      let DATA = source.splice(26, 52), f = $('footer'), stringJSON =  JSON.stringify(DATA, null, "  ");
       f.append("<br /><br />" + stringJSON);
-      
+    //--> If START clicked replace the JSON string with new one representing new ordered values on page.  
       if(clicked) {
         f[0].innerHTML = "";
         f.append("<br /><br />" + stringJSON);
@@ -73,23 +74,13 @@ let k; //|||||  This is a global !
   //
   ////{-------------------------------------
   //ii./--> Draw Canvas
-  //   let prepCanvas = (source) => 
-  //     {
-
-  //       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
-  //       //--> got context
-  //       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
-
-  //       ctx.translate (-424, -450); //move to center of a canvas
-  // ctx.drawImage (image, 0, 0);
-
-  //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
-  //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
-  //     }
+  //
   ////{-------------------------------------
   /////// CLOSE DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   /////////////////////////////////////////////////////////
-  //
+  //  let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
+  //  //--> got context
+  //  [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
   //
   ////////////////////////////////////////
   /////// GET & CRUNCH DATA ////////////// 
@@ -261,17 +252,17 @@ let k; //|||||  This is a global !
 ///////// UI RENDER METHODS ///////// 
 //// 
  //.i/ Make Canvas funcs
-  can = (a, d, {h, w}) => {
+//   can = (a, d, {h, w}) => {
     
-                            let can    = d.createElement('canvas');
-                            can.height = h;
-                            can.width  = w;
+//                             let can    = d.createElement('canvas');
+//                             can.height = h;
+//                             can.width  = w;
 
-                            return a.appendChild(can);
+//                             return a.appendChild(can);
     
-                          }
+//                           }
 
-  W.can = can;
+//   W.can = can;
 ////  
  //.ii/ Make Input-Field funcs
   inp = (a, {lX, iX, lY, iY}, ...r) => 
@@ -326,7 +317,7 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
 //these run when START button clicked - they initialize the display
 //II./
-W.can(D.getElementById("quads12"), D, {h:200,w:200});
+//W.can(D.getElementById("quads12"), D, {h:200,w:200});
 //III./
 W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
 //IV./
