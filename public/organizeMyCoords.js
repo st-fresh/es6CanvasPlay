@@ -1,13 +1,37 @@
-//Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
-((W, $, can, inp, click) =>  //q=0) => 
+/// Coding Challenge by Jonathan James 
+/// ES6, JQuery, Canvas 
+/// See file 'summary.md' for review
+
+/////////////////////
+/// SUMMARY GUIDE ///
+//|
+//|  As requested this Challenge includes a summary 
+//|
+       //|
+///
+let k; //This is a global
+///
+       //|
+ //
+   let t; //This is local to some other function
+ //
+       //|
+
+//| Pat attend to romain numerals i./, ii./, iii./ for soft references by name to other parts of code
+//| Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram
+//|
+/// END GUIDE ///
+/////////////////////
+
+
+///
+((W, $, can, inp, click) =>  
   {  
-
-////////////////////////////////
-///////// SET PRIME UI ///////// 
-////
-////i./ START button /// Click-Listener ///
+///
+ // 
+  //
     let [_B, _Iui, _Cui] = [$('body'), $('#inputUI'), $('#controlUI')];
-
+  //
 
 ///////////////////////////////////////////////////////////
 ///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
