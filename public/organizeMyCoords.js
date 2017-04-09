@@ -2,8 +2,8 @@
 /// ES6, JQuery, Canvas 
 /// See file *summary.md* for review
 
-/////////////////////
-/// SUMMARY ///
+/////////////|
+/// SUMMARY /|
 //>> //|||||||  This is a line with nothing on it; typically preceding any other declaration.
 //||||||||||||  As requested this Challenge includes a summary 
 //|
@@ -30,8 +30,8 @@ let k; //|||||  This is a global
 //||||||||||||  ..for soft-references by-name to other parts of code.
 //||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
 //>> //|||||||  This is a line with nothing on it; typically preceding any other declaration
-/// END ///
-/////////////////////
+/// END /////|
+/////////////|
 
 
 ///
