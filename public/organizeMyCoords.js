@@ -1,7 +1,7 @@
 /// Coding Challenge by Jonathan James 
 /// ES6, JQuery, Canvas 
 /// See file *summary.md* for review
-
+///>>
 /////////////|
 /// SUMMARY /|
 //>> //|||||||  This is a line with nothing on it; typically preceding any other declaration.
@@ -32,22 +32,25 @@ let k; //|||||  This is a global
 ///>> //||||||  This is a line with nothing on it; typically preceding any other declaration
 /// END /////|
 /////////////|
-
-
+///>>
+///>>
+///>>  S T A R T
+///>>
+///>>
+//{------------------------------------- 
 ///
 ((W, $, can, inp, click) =>  
-{  
-///
- //>> 
+  {  
+  //>> 
   //
     let _Iui = $('#inputUI');
   //
-
+  //>>
   //////////////////////////////////////////////////////////
   /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   //
   //{-------------------------------------
-  //i./ Print ordered data array to conole &&|| Draw Canvas
+  //i./--> Print ordered data array to conole 
   //--> .log(answer) /// commend-out to *   * at //ii??./ to add .hyp props back to data
     let display = (source) => 
     {
@@ -62,25 +65,23 @@ let k; //|||||  This is a global
     //-->
     }
   //}-------------------------------------
-///>>
+  //>>
   ////{-------------------------------------
-  //ii./
-//   let prepCanvas = (source) => 
-//     {
-      
-//       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
-//       //--> got context
-//       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
-      
-//       ctx.translate (-424, -450); //move to center of a canvas
-// ctx.drawImage (image, 0, 0);
-      
-//       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
-//       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
-//     }
-  ////{-------------------------------------
+  //ii./--> Draw Canvas
+  //   let prepCanvas = (source) => 
+  //     {
 
-    
+  //       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
+  //       //--> got context
+  //       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
+
+  //       ctx.translate (-424, -450); //move to center of a canvas
+  // ctx.drawImage (image, 0, 0);
+
+  //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
+  //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+  //     }
+  ////{-------------------------------------
   /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   /////////////////////////////////////////////////////////
 
@@ -91,38 +92,38 @@ let k; //|||||  This is a global
 //iii./ Get data first /// Ensure it's ready for display 
   ((W, $, send) => 
   {  
-  //iii.i/ Grab input-fields /// Set local-globals for data      
+  //iii.i/--> Grab input-fields /// Set local-globals for data      
     let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
-  //
+  //>>
   //{-------------------------------------
-  //iii.ii/ Grab data from coordinates.json /// function
+  //iii.ii/--> Grab data from coordinates.json /// function
     function sender(callback) 
     {
-    //
+    //>>
       let [z, splitXY, xval, yval] = [0,, [], []]; 
     //{-------------------------------------
-    //iii.iii/ .getJSON requires full url /// .each  
+    //iii.iii/--> .getJSON requires full url /// .each  
       $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
       function(data) 
       {
-                   //{-------------------------------------        
-        $.each(data, function( index, value ) 
-                     {
-                   //--> Split data into local-global vars xval, and yval /// .split .push
-                       splitXY = (data[z].value).split(',');
-                       xval.push(splitXY[0]);
-                       yval.push(splitXY[1]);
-                       z++ 
-                   //>>
-                     }
-                   //}-------------------------------------
-
+      //{-------------------------------------        
+        $.each(data, 
+        function( index, value ) 
+        {
+        //--> Split data into local-global vars xval, and yval /// .split .push
+          splitXY = (data[z].value).split(',');
+          xval.push(splitXY[0]);
+          yval.push(splitXY[1]);
+          z++ 
+        //>>
+        }
+      //}-------------------------------------
               );
       //>>
         callback(data, xval, yval);
       //>>
-        }
-      //}-------------------------------------
+      }
+    //}-------------------------------------
                ); //--> Close .getJSON
       } //--> Close sender()
     //}-------------------------------------
@@ -234,8 +235,8 @@ let k; //|||||  This is a global
 
      W.send = send;
     
-    })(window, jQuery);
-  
+   })(window, jQuery);
+///  
 ///////////////////////////  
 //// DYNAMIC-LISTENER ////
   click = (x,y, inputs, clicker) => 
@@ -318,7 +319,11 @@ let k; //|||||  This is a global
   W.inp = inp;
 ////
 /////////////////URM/////////////////
-})(window, jQuery);
+  }
+)(window, jQuery);
+///
+//}-------------------------------------
+
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
 //I./
