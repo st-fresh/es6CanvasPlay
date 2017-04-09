@@ -11,37 +11,67 @@
 
 ///////////////////////////////////////////////////////////
 ///////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
-////??/
-  let prepCanvas = () => 
+////ii./  Responds to Click-Listener --> Review Data handling at ..?
+  
+  let display = (source) => 
     {
-      
-      let [can, ctx, r] = [$('canvas'), $("canvas")[0].getContext('2d'), 3]; //r--> radius of a point on canvas
-      //--> got context
-      [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
-      
-      
-      //--> only split off unordered source in coordinates.json if ready to send to display.. 
-      // console.log(ctx)
-      _Iui.append("<input type='button' id='run' value='START'>");
-  
-      $( "#run" ).click(function() 
-                          {
+// console.log(source);
+    let [DATA] = [];
 
-                            runOnClick(); //CRUNCH VALUES AGAIN
+    DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+      
+    //ANSWER IN CONSOLE
+    // console.log(DATA);
+    _Iui.append("<input type='button' id='run' value='START'>");
 
-                          });
+    $( "#run" ).click(function() 
+                        {
+
+                          runOnClick(); //CRUNCH VALUES AGAIN
+
+                        }
+                     );
+
+  }
   
-    }
+//   let prepCanvas = (source) => 
+//     {
+      
+//       let [can, ctx, r, DATA] = [$('canvas'), $("canvas")[0].getContext('2d'), 3, ]; //r--> radius of a point on canvas
+//       //--> got context
+//       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
+      
+      
+      
+//       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
+//       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+      
+      
+      
+      
+//       //carry through .hyp props on source by commenting-out ' delete d[j+m].hyp; ' at ////v./
+//       // console.log(source)
+      
+//       _Iui.append("<input type='button' id='run' value='START'>");
+  
+//       $( "#run" ).click(function() 
+//                           {
+
+//                             runOnClick(); //CRUNCH VALUES AGAIN
+
+//                           });
+  
+//     }
 
 //////////////////////////////////
 ///////// GET & CRUNCH DATA ////////////// 
-//// ** Responds to Click-Listener --> ///i./
-//// 
+////i./ Get data first --> Ensure it's ready for display 
   ((W, $, send, out, inputs) => 
     {  
 ////ii./ Grab input-fields --> Set local-globals for data
     inputs = $('#inputUI');
-    let d, xvals, yvals;
+    
+    let d, og, xvals, yvals;
     
 ////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
     function sender(callback) 
@@ -74,9 +104,11 @@
     sender(function (data, xval, yval) 
            {
             
-             [d, xvals, yvals] = [data, xval, yval]
-             
-             send();
+             d     = data;
+             og    = data;
+             xvals = xval.map(Number);
+             yvals = yval.map(Number);
+             send(d, og, xvals, yvals);
 
            }
           );
@@ -84,59 +116,77 @@
 ////v./ Compare --> Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
     function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
       {
-
+// console.log(d)
         let [i,j,l,m] = [0,26,dist.length,];
-        
         
         for( i, j ; i<l ; i++) {
 
           m = $.inArray(d[i].hyp, dist);
- 
+          
+      //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
           d[j+m] = d[i];
+          
+          if (i=26) {
+            
+            // delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
 
-          delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
+            // display(d); //for answer in console and rendered on page
+            
+            // prepCanvas(d); //un-comment this line to show answer drawn to canvas
+            
+              
+          }
+
 
         }
-
-        prepCanvas();
-
-    }
+        
+      }
 
 ////vi./ Send --> Prep and then Send data to compare() @ ////v./
 
-    function send() 
+    function send(d, og, xvals, yvals) 
       {
       
-        // let [vx, vy] = [inputs[0].children[2].value, inputs[0].children[4].value]; //user input 
-        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here
+        // let [vx, vy, arb] = [inputs[0].children[2].value, inputs[0].children[4].value, Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
         
-//draw?/// TEST --> all should be defined before moving forward to compare() and/or draw()
+        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
+        
+        // let [vx, vy, arb] = [, , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
+        
+       /// TEST --> all should be defined before moving forward to compare() and/or use canvas
        // console.log(vx, vy);
       // console.log(d);
      // console.log(xvals);
     // console.log(yvals);
         
         let [fvx, fvy, hyps, i, l] = [,,[],0, xvals.length];
-      
-        for( i = 0 ; i < l ; i++ ) {
-          //Math.abs() --> Accounts here for (-) values --> flips them across the X and/or Y axis for comparisons >> see *summary.md* 
-          [fvx, fvy] = [ (Math.abs((xvals[i] - vx)*(xvals[i] - vx))), (Math.abs((yvals[i] - vy)*(yvals[i] - vy))) ];
-          d[i].hyp = ( Math.sqrt(fvx + fvy) ); //see *summary.md* file for why Math.floor() not used here
+        // console.log(xvals, yvals)
+        for( i ; i < l ; i++ ) {
+          
+          //Math.abs() --> Accounts here for (-) values --> Finds positive magnitude >> see *summary.md*
+          fvx = Math.abs( (xvals[i] - vx)*(xvals[i] - vx) );
+          fvy = Math.abs( (yvals[i] - vy)*(yvals[i] - vy) );
+
+          d[i].hyp = Math.sqrt(fvx + fvy); //see *summary.md* file for why Math.floor() not used here
+
           hyps.push(d[i].hyp); 
+          
+          if (hyps.length === 26) {
+            hyps.sort(function(a,b)
+                        { 
+                    
+                          return a - b;
+          
+                        }
+                     );
+            
+            arb.push.apply(d,arb); //add to sourced array arbitrary values that will hold ordered data
+            // console.log(d);
+            // compare(d, hyps);
+            
+          }
 
         }
-
-        hyps.sort(function(a,b)
-                    { 
-                    
-                    return a - b;
-          
-                    }
-                 );
-        
-        arb.push.apply(d,arb);//add to sourced array arbitrary values that will hold ordered data
-
-        compare(d, hyps);
       
       }
 
