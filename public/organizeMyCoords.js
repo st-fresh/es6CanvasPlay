@@ -1,5 +1,5 @@
 //Coding Challenge by Jonathan James /// ES6, JQuery, Canvas /// See file 'summary.md' for review
-((W, $, can, inp, _d, send, runOnClick) => 
+((W, $, can, inp, _d, click, runOnClick, q=0) => 
   {  
 
 ////////////////////////////////
@@ -15,24 +15,24 @@
   
   let display = (source) => 
     {
-// console.log(source);
-    let [DATA] = [];
 
-    DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
+      let [DATA] = [source.splice(26, 52)]; 
+      //DATA represents the answer to this challenge without visual canvas representation, clean & BRANCH after you send to display!
+
+      console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
       
-    //ANSWER IN CONSOLE
-    // console.log(DATA);
-    _Iui.append("<input type='button' id='run' value='START'>");
+      if (q <= 0) { 
+        
+        _Iui.append("<input type='button' id='run' value='START'>");
+        
+      }
+      
+      
+      q++;
+      
+    }
+  
 
-    $( "#run" ).click(function() 
-                        {
-
-                          runOnClick(); //CRUNCH VALUES AGAIN
-
-                        }
-                     );
-
-  }
   
 //   let prepCanvas = (source) => 
 //     {
@@ -41,7 +41,8 @@
 //       //--> got context
 //       [ctx.lineWidth, ctx.lineJoin] = [2, 'round'];
       
-      
+//       ctx.translate (-424, -450); //move to center of a canvas
+// ctx.drawImage (image, 0, 0);
       
 //       //--> only split off unordered source in coordinates.json if ready to send to display.. async BABY!
 //       DATA = source.splice(0, 26); //this is answer to challenge without visual canvas representation, clean & BRANCH after you send to display!
@@ -66,12 +67,11 @@
 //////////////////////////////////
 ///////// GET & CRUNCH DATA ////////////// 
 ////i./ Get data first --> Ensure it's ready for display 
-  ((W, $, send, out, inputs) => 
+  ((W, $, send) => 
     {  
-////ii./ Grab input-fields --> Set local-globals for data
-    inputs = $('#inputUI');
-    
-    let d, xvals, yvals;
+////ii./ Grab input-fields --> Set local-globals for data      
+
+    let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
     
 ////iii./ Grab data from coordinates.json --> Split data into local-global vars xval, and yval
     function sender(callback) 
@@ -104,10 +104,14 @@
     sender(function (data, xval, yval) 
            {
             
-             d     = data;
-             xvals = xval.map(Number);
-             yvals = yval.map(Number);
-             send(d, xvals, yvals);
+             d     = dREF     = data;
+             xvals = xvalsREF = xval.map(Number);
+             yvals = yvalsREF = yval.map(Number);
+             inx   = $('#valX').val();
+             iny   = $('#valY').val();
+      
+             // send(d, xvals, yvals,false,[6,33]); //pass hard-coded values here in this file
+             send(d, xvals, yvals,false,[inx, iny]); //pass hard-coded values here in this file
 
            }
           );
@@ -130,7 +134,7 @@
           delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
           
           if (l === 26) {
-console.log(d)
+
             display(d); //for answer in console and rendered on page
             
             // prepCanvas(d); //un-comment this line to show answer drawn to canvas
@@ -145,24 +149,35 @@ console.log(d)
 
 ////vi./ Send --> Prep and then Send data to compare() @ ////v./
 
-    function send(d, xvals, yvals) 
+     send = (d, xvals, yvals, click, ...vs) =>
       {
-      
-        // let [vx, vy, arb] = [inputs[0].children[2].value, inputs[0].children[4].value, Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
+             d     = dREF;
+             xvals = xvalsREF;
+             yvals = yvalsREF;
+       console.log(vs);
+/// RANDOM & HARD-CODED STATES /// --> see ////iv./
+        let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
+        // console.log(vs[0], vs[1]);
+// USER-INPUT & RANDOM STATES //  
+               //let [vx, vy, arb] = [(inputs[0].children[2]).val(), (inputs[0].children[4]).val(), Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
+
+        if (click) {
+          console.log("click entered")
+        //let [vx, vy, arb] = [vs[0], vs[1] , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
+
+        }
+//DEFAULT STATE // 
         
-        let [vx, vy, arb] = [6, 33, Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
-        
-        // let [vx, vy, arb] = [ , , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
-        
+
        /// TEST --> all should be defined before moving forward to compare() and/or use canvas
        // console.log(vx, vy);
       // console.log(d);
      // console.log(xvals);
     // console.log(yvals);
         
-        let [fvx, fvy, hyps, i, l] = [ , , [], 0, xvals.length];
+        let [fvx, fvy, hyps, i] = [ , , [], 0];
         // console.log(xvals, yvals)
-        for( i ; i < l ; i++ ) {
+        for( i ; i < xvals.length ; i++ ) {
           
           //Math.abs() --> Accounts here for (-) values --> Finds positive magnitude >> see *summary.md*
           fvx = Math.abs( (xvals[i] - vx)*(xvals[i] - vx) );
@@ -191,10 +206,9 @@ console.log(d)
       
       }
 
-//?    // W.send = send;
+     W.send = send;
     
-    }
-  )(window, jQuery);
+    })(window, jQuery);
   
 
 
@@ -203,6 +217,22 @@ console.log(d)
 //     W.send();
     
 //   }
+  
+  click = (x,y) => {
+    
+      $( "#run" ).click(function() 
+                          { 
+      console.log("clicked");
+                            let clicked = true;
+                            W.send(0,0,0,clicked,[x.val(),y.val()]);
+      
+                          }
+                       );
+  
+  }
+  
+  W.click = click;
+
   
 
 ///////// UI RENDER METHODS ///////// 
@@ -246,13 +276,13 @@ console.log(d)
                       }, 2000);
 
       }
-
+  
     }
   
   W.inp = inp;
 ////
 /////////////////URM/////////////////
-  
+  W.runOnClick = runOnClick;
 })(window, jQuery);
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
@@ -268,10 +298,21 @@ let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
 
 //these run when START button clicked - they initialize the display
 //II./
-W.can(D.getElementById("quads12"), D, {h:100,w:100});
+W.can(D.getElementById("quads12"), D, {h:200,w:200});
 //III./
 W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
-// W.send();
+//IV./
+W.click(xInp, yInp);
+// $( "input[type='text']" ).change(function() 
+//                                    {
+    
+//   // W.send(,,,[1,0]);
+  
+//                                    }
+//                                 );
+
+
+
 
 
 
