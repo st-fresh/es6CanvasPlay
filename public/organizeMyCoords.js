@@ -139,7 +139,7 @@ let k; //|||||  This is a global !
              iny   = $('#valY').val();
            //
            //--> Use only one of the following send() funcs below (1 or (2 : See *summary.md* for more..
-             // send(d, xvals, yvals,false,[6,33]); //--> pass hard-coded values by changing [6,33] (1
+               // send(d, xvals, yvals,false,[6,33]); //--> pass hard-coded values by changing [6,33] (1
              send(d, xvals, yvals,false,[inx, iny]); //--> pass randomized values on-page-load [inx, iny] (2
            } //--> Close callback
          //}-------------------------------------
@@ -151,90 +151,80 @@ let k; //|||||  This is a global !
     {
       let [i, j, l, m] = [0, 26, 0, ];
     //--> .inArray ||| display() ||| delete
-      for( i, j ; i<j ; i++) {
-    //
+      for( i, j ; i<j ; i++) 
+      {
         m = $.inArray(d[i].hyp, dist);
-    //
         l++;
-    //
-    //console.log(m) //-->  TEST --> Use ' ' ||| inside this loop here to see the correct order as an index
+      //console.log(m) //-->  TEST --> Use ' ' ||| inside this loop here to see the correct order as an index
         d[j+m] = d[i];
-    //    
         delete d[j+m].hyp; 
-    //
+      //
         if (l === 26) {
-    //
           display(d); //for answer in console and rendered on page
-    //
-          // prepCanvas(d); //un-comment this line to show answer drawn to canvas
+            // prepCanvas(d); //un-comment this line to show answer drawn to canvas
         } //--> Close if in the for
       }//--> Close for
     //    
-      }//--> Close compare()
-    //}-------------------------------------
+    }//--> Close compare()
+  //}-------------------------------------
 
     //{-------------------------------------
     //iii.vii/--> Prep and then Send data to compare() at ////iii.v/
     //--> send() | Array.from() | .length | Math.abs() | Math.sqrt() | .push | .sort | .apply | compare | W.send
      send = (d, xvals, yvals, click, ...vs) =>
-      {
-      // 
-        d     = dREF;
-        xvals = xvalsREF;
-        yvals = yvalsREF;
-      // 
-        let vx, vy, arb = Array.from('12345678901234567890123456');
-      // 
+     {
+     // 
+       d     = dREF;
+       xvals = xvalsREF;
+       yvals = yvalsREF;
+     // 
+       let vx, vy, arb = Array.from('12345678901234567890123456');
+     //--> 1) Handles randomized on-page-load
        if(!click) {  
          vx = vs[0][0];
          vy = vs[0][1];
        }
-
-        if (click) {
-          console.log("click entered")
-          vx = vs[0][0];
-          vy = vs[0][1];
-        }
-       
-//DEFAULT STATE // 
-        
-
-       /// TEST --> all should be defined before moving forward to compare() and/or use canvas
-       // console.log(vx, vy);
-      // console.log(d);
-     // console.log(xvals);
-    // console.log(yvals);
-        
-        let [fvx, fvy, hyps, i] = [ , , [], 0];
-        // console.log(xvals, yvals)
-        for( i ; i < xvals.length ; i++ ) {
-          
-          //Math.abs() --> Accounts here for (-) values --> Finds positive magnitude >> see *summary.md*
-          fvx = Math.abs( (xvals[i] - vx)*(xvals[i] - vx) );
-          fvy = Math.abs( (yvals[i] - vy)*(yvals[i] - vy) );
-
-          d[i].hyp = Math.sqrt(fvx + fvy); //see *summary.md* file for why Math.floor() not used here
-
-          hyps.push(d[i].hyp); 
-          
-          if (hyps.length === 26) {
-            hyps.sort(function(a, b)
-                        { 
-                    
-                          return a - b;
-          
-                        }
-                     );
-            
-            arb.push.apply(d,arb); //add to sourced array arbitrary values that will hold ordered data
-
-            compare(d, hyps);
-            
-          }
-
-        }
-      
-      }
+     //--> 2) Handles button clicks
+       if (click) {
+         vx = vs[0][0];
+         vy = vs[0][1];
+       }  
+     //--> send() continues
+     ///--> TESTING --> all tests below should pass before moving forward to compare() and use canvas.
+     // console.log(vx, vy); //-->  TEST --> Check your random and hard-coded inputs.
+     // console.log(d); //-->  TEST --> Check your original sourced data-array coordinates.json
+     // console.log(xvals); //-->  TEST --> Check x-values split from sourced data-array, see //iii.iv 
+     // console.log(yvals); //-->  TEST --> Check y-values split from sourced data-array, see //iii.iv 
+     //   
+       let [fvx, fvy, hyps, i] = [ , , [], 0];
+     //
+       for( i ; i < xvals.length ; i++ ) 
+       {
+       //--> Math.abs() Accounts here for (-) values ||| Finds positive magnitudes ||| see *summary.md*
+         fvx      = Math.abs( (xvals[i] - vx)*(xvals[i] - vx) );
+         fvy      = Math.abs( (yvals[i] - vy)*(yvals[i] - vy) );
+       //
+         d[i].hyp = Math.sqrt(fvx + fvy); //--> See *summary.md* file for why Math.floor() not used here.
+       //
+         hyps.push(d[i].hyp); 
+       //
+         if (hyps.length === 26) 
+         {
+                  //{-------------------------------------
+                  //iii.viii/--> Sort hyps array filled with distances/magnitudes/hypotenuses' least to greatest. 
+           hyps.sort(function(a, b)
+                    { 
+                      return a - b;
+                    } //--> Close anonymous function() param in sort()
+                  //}-------------------------------------
+                   );
+           arb.push.apply(d,arb); //--> Add to sourced array arbitrary values that will hold ordered data.
+         //
+          compare(d, hyps);
+         //
+         } //--> Close if-statement in the for-loop in the send()
+       }//--> Close for-loop in the send() 
+     }//--> Close send() 
 
      W.send = send;
     
