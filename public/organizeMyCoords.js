@@ -27,8 +27,8 @@ let k; //|||||  This is a global
   //}-------------------------------------
 //>>
 //||||||||||||  Pay attention to roman numerals like i./, ii./, iii./ and so on..
-//||||||||||||  for soft-references by-name to other parts of code.
-//||||||||||||  Use summary.md which includes Challenge Problem Statement to use a color-coded flow diagram.
+//||||||||||||  ..for soft-references by-name to other parts of code.
+//||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
 //>> //|||||||  This is a line with nothing on it; typically preceding any other declaration
 /// END ///
 /////////////////////
