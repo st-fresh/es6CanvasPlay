@@ -109,7 +109,7 @@ let k; //|||||  This is a global !
         $.each(data, 
         function( index, value ) 
         {
-        //iiii.iv --> Split data into local-global vars xval, and yval /// .value | .split | .push
+        //iii.iv --> Split data into local-global vars xval, and yval /// .value | .split | .push
           splitXY = (data[z].value).split(',');
           xval.push(splitXY[0]);
           yval.push(splitXY[1]);
@@ -128,7 +128,7 @@ let k; //|||||  This is a global !
     //}-------------------------------------
     //
          //{-------------------------------------
-         //iv./--> Pass datas with callback /// Call send() which calls compare() too.
+         //iii.v/--> Pass datas with callback /// Call send() which calls compare() too.
     sender(function (data, xval, yval) 
            {
            //--> .map .val send()
@@ -146,7 +146,7 @@ let k; //|||||  This is a global !
           ); //--> Close sender params
          //
   //{-------------------------------------
-  //iii.v/--> Compare then Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
+  //iii.vi/--> Compare then Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
     function compare(d, dist) //--> d = sourced array, dist = distances or hypotenuses or magnitudes
     {
       let [i, j, l, m] = [0, 26, 0, ];
@@ -165,25 +165,26 @@ let k; //|||||  This is a global !
         if (l === 26) {
     //
           display(d); //for answer in console and rendered on page
-
+    //
           // prepCanvas(d); //un-comment this line to show answer drawn to canvas
+        } //--> Close if in the for
+      }//--> Close for
+    //    
+      }//--> Close compare()
+    //}-------------------------------------
 
-        }
-
-        }
-        
-      }
-
-////vi./ Send --> Prep and then Send data to compare() @ ////v./
-
+    //{-------------------------------------
+    //iii.vii/--> Prep and then Send data to compare() at ////iii.v/
+    //--> send() | Array.from() | .length | Math.abs() | Math.sqrt() | .push | .sort | .apply | compare | W.send
      send = (d, xvals, yvals, click, ...vs) =>
       {
-       
-       d     = dREF;
-       xvals = xvalsREF;
-       yvals = yvalsREF;
-       // console.log(vs);
-/// RANDOM & HARD-CODED STATES /// --> see ////iv./
+      // 
+        d     = dREF;
+        xvals = xvalsREF;
+        yvals = yvalsREF;
+     //--> Choose State: 1) Random values on-page-load? --> un-comment (1
+     //--> Choose State: 2) 
+       /// RANDOM & HARD-CODED STATES /// --> see ////iv./
         let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
 // USER-INPUT & RANDOM STATES //  
                //let [vx, vy, arb] = [(inputs[0].children[2]).val(), (inputs[0].children[4]).val(), Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
