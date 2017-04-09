@@ -138,7 +138,7 @@ let k; //|||||  This is a global !
              inx   = $('#valX').val();
              iny   = $('#valY').val();
            //
-           //--> Use only one of the following send() funcs below (1 or (2 :
+           //--> Use only one of the following send() funcs below (1 or (2 : See *summary.md* for more..
              // send(d, xvals, yvals,false,[6,33]); //--> pass hard-coded values by changing [6,33] (1
              send(d, xvals, yvals,false,[inx, iny]); //--> pass randomized values on-page-load [inx, iny] (2
            } //--> Close callback
@@ -182,18 +182,20 @@ let k; //|||||  This is a global !
         d     = dREF;
         xvals = xvalsREF;
         yvals = yvalsREF;
-     //--> Choose State: 1) Random values on-page-load? --> un-comment (1
-     //--> Choose State: 2) 
-       /// RANDOM & HARD-CODED STATES /// --> see ////iv./
-        let [vx, vy, arb] = [vs[0][0], vs[0][1], Array.from('12345678901234567890123456')]; //hard-coded input possible here --> see *summary.md*
-// USER-INPUT & RANDOM STATES //  
-               //let [vx, vy, arb] = [(inputs[0].children[2]).val(), (inputs[0].children[4]).val(), Array.from('12345678901234567890123456')]; //un-comment for random-generated input-values on-load
+      // 
+        let vx, vy, arb = Array.from('12345678901234567890123456');
+      // 
+       if(!click) {  
+         vx = vs[0][0];
+         vy = vs[0][1];
+       }
 
         if (click) {
           console.log("click entered")
-        //let [vx, vy, arb] = [vs[0], vs[1] , Array.from('12345678901234567890123456')]; //inputs are empty awaiting user to fill them and click START
-
+          vx = vs[0][0];
+          vy = vs[0][1];
         }
+       
 //DEFAULT STATE // 
         
 
@@ -243,7 +245,7 @@ let k; //|||||  This is a global !
   click = (x,y, inputs, clicker) => 
     { 
       //->>//SHOWER!!
-      clicker = false; 
+      clicker = true; 
       let button; //console.log("test");
       //--inputs->>
       if($(inputs)){ 
@@ -251,7 +253,7 @@ let k; //|||||  This is a global !
         button = $('#button');
         //
         console.log(button);
-        console.log(x.val(), y.val());
+        // console.log(x.val(), y.val());
         //--->
       }
 
