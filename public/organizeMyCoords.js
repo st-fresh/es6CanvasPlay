@@ -28,6 +28,8 @@ let k; //|||||  This is a global !
 //||||||||||||  ..for soft-references by-name to other parts of code.
 //||||||||||||  Reference summary.md which includes Challenge Problem Statement and a color-coded flow diagram.
 //              This is a line with nothing on it; typically preceding any other declaration; easily removable.
+//console.log(k) //-->  TEST --> This is a test, un-comment it to see test-results in your debug-console.
+//              Easily removable.
 /// END //||||
 //
 //
@@ -47,8 +49,8 @@ let k; //|||||  This is a global !
   /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   //
   //{-------------------------------------
-  //i./--> Print ordered data array to conole 
-  //--> .log(answer) ||| commend-out to *   * at //ii??./ to add .hyp props back to data
+  //i./--> Print ordered data array to conole. 
+  //--> .log(answer) ||| at //iii.v/ commend-out ' delete d[j+m].hyp; ' to add .hyp props back to data.
     let display = (source) => 
     {
     //
@@ -56,7 +58,7 @@ let k; //|||||  This is a global !
     //---> DATA represents the answer to this challenge.. 
     //---> without visual canvas representation, clean(currently cleaning) & BRANCH after you send to display!
     // 
-      console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line
+      console.log(DATA); //FOR ANSWER IN CONSOLE: un-comment this line !
     //--> .getContext /// .translate 
       // prepCanvas(source);
       //
@@ -81,15 +83,15 @@ let k; //|||||  This is a global !
   ////{-------------------------------------
   /////// DISPLAY RESULTS (CANVAS PREP & DRAWING) ///////// 
   /////////////////////////////////////////////////////////
-
-
+  //
+  //
   ////////////////////////////////
   /////// GET & CRUNCH DATA ////////////// 
-//{-------------------------------------
-//iii./ Get data first ||| Ensure it's ready for display 
+  //{-------------------------------------
+  //iii./ Get data first ||| Ensure it's ready for display. 
   ((W, $, send) => 
   {  
-  //iii.i/--> Grab input-fields ||| Set local-globals for data      
+  //iii.i/--> Grab input-fields ||| Set local-globals for data.      
     let d, xvals, yvals, dREF, xvalsREF, yvalsREF, inx, iny;
   //
   //{-------------------------------------
@@ -119,14 +121,14 @@ let k; //|||||  This is a global !
       //
         callback(data, xval, yval);
       //
-      } //--> Close anonymous .getJSON function() param
+      } //--> Close anonymous .getJSON function() param.
     //}-------------------------------------
-             ); //--> Close .getJSON params
+             ); //--> Close .getJSON params.
       } //--> Close sender()
     //}-------------------------------------
     //
          //{-------------------------------------
-         //iv./--> Pass datas with callback /// Call send() which calls compare() too
+         //iv./--> Pass datas with callback /// Call send() which calls compare() too.
     sender(function (data, xval, yval) 
            {
            //--> .map .val send()
@@ -136,31 +138,32 @@ let k; //|||||  This is a global !
              inx   = $('#valX').val();
              iny   = $('#valY').val();
            //
-             send(d, xvals, yvals,false,[6,33]); //pass hard-coded values by changing [6,33] to your desired values
-             // send(d, xvals, yvals,false,[inx, iny]); //pass randomized values to matcher
+           //--> Use only one of the following send() funcs below (1 or (2 :
+             // send(d, xvals, yvals,false,[6,33]); //--> pass hard-coded values by changing [6,33] (1
+             send(d, xvals, yvals,false,[inx, iny]); //--> pass randomized values on-page-load [inx, iny] (2
            } //--> Close callback
          //}-------------------------------------
           ); //--> Close sender params
          //
   //{-------------------------------------
   //iii.v/--> Compare then Add to sourced coordinates.json in-order: [{least(closest)},..,{greatest(farthest)}] 
-    function compare(d, dist) //d=sourced array, dist=distances or hypotenuses
+    function compare(d, dist) //--> d = sourced array, dist = distances or hypotenuses or magnitudes
     {
       let [i, j, l, m] = [0, 26, 0, ];
-    //--> .inArray /// display()
+    //--> .inArray ||| display() ||| delete
       for( i, j ; i<j ; i++) {
     //
         m = $.inArray(d[i].hyp, dist);
     //
         l++;
-
-      //// TEST --> Use ' console.log(m) ' inside this loop here to see the correct order as an index
+    //
+    //console.log(m) //-->  TEST --> Use ' ' ||| inside this loop here to see the correct order as an index
         d[j+m] = d[i];
-
-        delete d[j+m].hyp; //comment-out this line to see order based on hyp prop --> use $> console.log(d[i]); in-place of it
-
+    //    
+        delete d[j+m].hyp; 
+    //
         if (l === 26) {
-
+    //
           display(d); //for answer in console and rendered on page
 
           // prepCanvas(d); //un-comment this line to show answer drawn to canvas
