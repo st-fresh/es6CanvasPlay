@@ -99,7 +99,7 @@ let k; //|||||  This is a global !
       let [z, splitXY, xval, yval] = [0,, [], []]; 
     //{-------------------------------------
     //iii.iii/--> .getJSON requires full url ||| .each | callback() 
-      $.getJSON('https://colorful-stamp.glitch.me/coordinates.json', 
+      $.getJSON('https://satin-boat.glitch.me/coordinates.json', 
       function(data) 
       {
       //{-------------------------------------        
@@ -305,43 +305,40 @@ let k; //|||||  This is a global !
 
 
 // Run Logic - Update View calling funcs built in Immediate Invocating func above
-//I./
-const W    = window;
-const D    = document;
-const xLbl = "<u>X-Value</u>";
-const xInp = $('<input id="valX" type="text" name="x" />');
-const yLbl = "<u>Y-Value</u>";
-const yInp = $('<input id="valY" type="text" name="y" />');
-var x,y;
+//I./--> Let and const vars
+///
+const W      = window,
+      D      = document,
+      xLbl   = "<u>X-Value</u>",
+      xInp   = $('<input id="valX" type="text" name="x" />'),
+      yLbl   = "<u>Y-Value</u>",
+      yInp   = $('<input id="valY" type="text" name="y" />');
+///
 let [rX, rY] = [Math.random() * 99 + 1, Math.random() * 99 + 1];
-
-//these run when START button clicked - they initialize the display
-//II./
-//W.can(D.getElementById("quads12"), D, {h:200,w:200});
-//III./
-W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); //test your own 'NUMBERS' on-page-load here
-//IV./
-// W.click(xInp, yInp, $('#button'));
+///
+//II./--> Run when START button clicked ||| Initialize the UI and Canvas.
+///--> Update canvas based on input values to properly represent any values on canvas(expanding cartesian plane).
+///
+// W.can(D.getElementById("quads12"), D, {h:200,w:200});
+///
+///--> Test your own 'NUMBERS' on-page-load below with (1
+W.inp($('#inputUI'), {lX:xLbl, iX:xInp, lY:yLbl, iY:yInp}, {rxN:rX, ryN:rY}); // (1
+///III./--> As values change input-fields update the data-array
+///
 // $( "input[type='text']" ).change(function() 
-//                                    {
+                                 // {
     
-//   // W.send(,,,[1,0]);
   
-//                                    }
-//                                 );
+                                 // }
 
-
-// let newin = $('#button');
-// console.log(newin)
-
-
+                                // );
+///
+///IV./--> Handle START button clicks ||| .click
 $( "#button" ).click(function() 
-                       {
-                         let clicked = true;//here we go
-                         W.click(xInp, yInp, $('#button'),clicked);
-                         console.log("non-immediate");
-  
-                        }
+                     {
+                       let clicked = true;
+                       W.click(xInp, yInp, $('#button'),clicked);
+                     }
                     );
-//
-//-->  E N D
+///
+///-->  E N D
